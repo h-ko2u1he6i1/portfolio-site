@@ -7,7 +7,6 @@ const notoSansJp = Noto_Sans_JP({ subsets: ["latin"], variable: "--font-noto-san
 const ephesis = Ephesis({ subsets: ["latin"], weight: "400", variable: "--font-ephesis" });
 
 import Header from "../components/layout/Header";
-import Footer from "../components/layout/Footer";
 
 export const metadata: Metadata = {
   title: "ohei's Portfolio",

@@ -34,7 +34,7 @@ function Scene() {
   const mouse = useRef([0, 0]);
 
   const shapes = useMemo(() => {
-    return Array.from({ length: COUNT }).map((_, i) => {
+    return Array.from({ length: COUNT }).map(() => {
       const position = new THREE.Vector3(
         (Math.random() - 0.5) * 18, // 範囲を狭めて密度を上げます
         (Math.random() - 0.5) * 18,

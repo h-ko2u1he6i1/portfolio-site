@@ -1,7 +1,4 @@
 "use client";
-
-import Image from "next/image";
-import Link from "next/link";
 import styles from "./page.module.css";
 import SectionTitle from '@/components/common/SectionTitle';
 import WorkCardItem from '@/components/works/WorkCardItem';
@@ -22,7 +19,7 @@ export default function Home() {
           <GeometricBackground />
         </div>
         <div className={styles.hero__content}>
-          <h1 className={styles.hero__title}>Kohei's Portfolio</h1>
+          <h1 className={styles.hero__title}>Kohei&apos;s Portfolio</h1>
           <p className={styles.hero__subtitle}>Web Designer</p>
           <p className={styles.hero__description}>このポートフォリオサイトは<br className={styles['br-sp']} />Gemini CLIの使用して作成しました</p>
         </div>

@@ -1,7 +1,4 @@
 "use client";
-
-import Image from "next/image";
-import Link from "next/link";
 import styles from "./page.module.css";
 import { worksData } from "@/data/works";
 import WorkCardItem from "@/components/works/WorkCardItem";

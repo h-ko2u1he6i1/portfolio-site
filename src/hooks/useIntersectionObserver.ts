@@ -11,17 +11,18 @@ export const useIntersectionObserver = (options: IntersectionObserverInit) => {
       setIsVisible(entry.isIntersecting);
     }, options);
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    const currentElement = ref.current;
+
+    if (currentElement) {
+      observer.observe(currentElement);
     }
 
     return () => {
-      const currentRef = ref.current;
-      if (currentRef) {
-        observer.unobserve(currentRef);
+      if (currentElement) {
+        observer.unobserve(currentElement);
       }
     };
-  }, [ref, options]);
+  }, [options]);
 
   return [ref, isVisible] as const;
 };
