@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+
+:root {
+  --color-background: #ffffff;
+  --color-foreground: #000000;
+  --color-primary: #4A7C9B; /* Muted Blue */
+  --color-accent: #70A37F; /* Muted Green */
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-400: #9ca3af;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  --color-blue-100: #dbeafe;
+  --color-blue-500: #3b82f6;
+  --color-blue-700: #1d4ed8;
+  --color-blue-800: #1e40af;
+  --color-green-100: #dcfce7;
+  --color-green-800: #166534;
+}
+
+html,
+body {
+  max-width: 100vw;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  color: var(--color-foreground);
+  background: var(--color-background);
+  font-family: 'Noto Sans JP', 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* Layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+
+.section {
+  padding: 80px 0;
+}
+
+.section--center {
+  text-align: center;
+}
+
+.section--light-gray {
+  background-color: var(--color-gray-100);
+}
+
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.page-title {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.button-wrapper {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* ボタン間の余白 */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}

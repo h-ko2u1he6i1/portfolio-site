@@ -1,0 +1,56 @@
+/* Page Title */
+.page-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--color-gray-800);
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+/* Profile Section (About Page) */
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+@media (min-width: 768px) {
+  .profile {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.profile__photo-wrapper {
+  flex-shrink: 0;
+}
+
+.profile__photo {
+  border-radius: 9999px;
+  object-fit: cover;
+}
+
+.profile__details {
+  flex-grow: 1;
+  color: var(--color-gray-700);
+}
+
+.profile__name {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.profile__title {
+  font-size: 16px;
+  color: var(--color-gray-600);
+  margin-bottom: 24px;
+}
+
+.profile__description {
+  margin-bottom: 16px;
+  line-height: 1.8;
+}
+
+

@@ -1,0 +1,143 @@
+/* Hero Section */
+.hero {
+  position: fixed; /* ビューポートに固定 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 0; /* 他のコンテンツの背面に配置 */
+}
+
+.hero__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: var(--color-background);
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  color: white; /* Adjust text color for visibility */
+}
+
+/* Scrollable Content */
+.scrollableContent {
+  position: relative;
+  z-index: 3; /* ヒーローセクションの上に表示 */
+  background-color: var(--color-background); /* コンテンツエリアの背景色 */
+  margin-top: 100vh; /* ヒーローセクションの高さ分だけマージンを確保 */
+}
+
+.hero__title {
+  font-size: 5rem;
+  font-weight: 400;
+  color: var(--color-gray-800);
+  font-family: var(--font-ephesis);
+  margin-bottom: 0;
+}
+
+.hero__subtitle {
+  font-size: 20px;
+  color: var(--color-gray-600);
+}
+
+.hero__description {
+  margin-top: 40px;
+  font-size: 16px;
+  color: var(--color-gray-600);
+  line-height: 1.8;
+}
+
+.br-sp {
+  display: none;
+}
+
+
+@media (max-width: 768px) {
+  .hero__title {
+    font-size: 36px;
+  }
+
+  .hero__subtitle {
+    font-size: 18px;
+  }
+
+  .br-sp {
+    display: block;
+  }
+}
+
+
+
+.skill-tag {
+  background-color: var(--color-gray-200);
+  color: var(--color-gray-700);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.about-summary {
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* Works Grid */
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .works-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .works-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Work Card */
+.work-card {
+  background-color: var(--color-background);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.work-card__image {
+  width: 100%;
+  height: auto;
+}
+
+.work-card__content {
+  padding: 0 16px 30px 16px;
+}
+
+.work-card__title {
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.work-card__description {
+  color: #00B7CE;
+  font-size: 14px;
+  font-weight: bold;
+}

@@ -1,0 +1,15 @@
+.skillList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.skillTag {
+  background-color: var(--color-gray-200);
+  color: var(--color-gray-700);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
