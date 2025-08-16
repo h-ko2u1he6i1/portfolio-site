@@ -9,7 +9,7 @@ const ephesis = Ephesis({ subsets: ["latin"], weight: "400", variable: "--font-e
 import Header from "../components/layout/Header";
 
 export const metadata: Metadata = {
-  title: "ohei's Portfolio",
+  title: "kohei's Portfolio",
   description: "WEBデザイナー Haraya Kohei のポートフォリオサイト",
 };
 
