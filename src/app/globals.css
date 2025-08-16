@@ -99,6 +99,13 @@ h1 {
   gap: 20px; /* ボタン間の余白 */
 }
 
+@media (max-width: 767px) {
+  .button-wrapper {
+    flex-direction: column;
+    align-items: center; /* ボタンを中央揃えにする */
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
