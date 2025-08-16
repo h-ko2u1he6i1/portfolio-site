@@ -21,7 +21,7 @@ export default function Home() {
         <div className={styles.hero__content}>
           <h1 className={styles.hero__title}>Kohei&apos;s Portfolio</h1>
           <p className={styles.hero__subtitle}>Web Designer</p>
-          <p className={styles.hero__description}>このポートフォリオサイトは<br className={styles['br-sp']} />Gemini CLIの使用して作成しました。<br />フレームワークには Next.js を採用し、<br className={styles['br-sp']} />フロントエンドは React をベースに構築しています。</p>
+          <p className={styles.hero__description}>このポートフォリオサイトは<br className={styles['br-sp']} />Gemini CLIの使用して作成しました。<br />フレームワークには Next.js を使用し、<br className={styles['br-sp']} />フロントエンドは React をベースに構築しています。</p>
         </div>
       </section>
 
