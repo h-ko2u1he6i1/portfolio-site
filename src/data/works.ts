@@ -50,6 +50,15 @@ export const worksData: Work[] = [
     externalLink: "https://www.furusapon.com/",
   },
   {
+    id: 15,
+    slug: '15',
+    title: "増岡組",
+    longDescription: "増岡組のコーポレートサイトのデザインを担当しました。ブランドイメージである「寄せ木」のモチーフを取り入れ、シンプルで統一感のあるデザインを意識しました。また、人とのつながりを大切にする企業姿勢を表現するため、働く人々に焦点を当てた写真を随所に使用。温かみや親しみを感じられるサイトに仕上げています。",
+    image: "/img/works-img15.jpg",
+    role: "Design",
+    externalLink: "https://www.masuoka-g.co.jp/",
+  },
+  {
     id: 5,
     slug: '5',
     title: "東京リスマチック株式会社 新卒採用サイト",
