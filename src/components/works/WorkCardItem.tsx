@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+
 import styles from './WorkCardItem.module.css';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 

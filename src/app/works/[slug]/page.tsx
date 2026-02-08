@@ -4,8 +4,8 @@ import { worksData } from "@/data/works";
 import Button from '@/components/common/Button';
 import Footer from '@/components/layout/Footer';
 
-export default function WorkDetailPage({ params }: { params: any }) {
-  const { slug } = params;
+export default async function WorkDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
 
   const workDetail = worksData.find(work => work.slug === slug);
 
