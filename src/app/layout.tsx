@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={`${inter.variable} ${notoSansJp.variable} ${ephesis.variable}`}>
+      <body className={`${inter.variable} ${notoSansJp.variable} ${ephesis.variable}`} suppressHydrationWarning>
         <Header />
         <main style={{ flexGrow: 1 }}>
           {children}

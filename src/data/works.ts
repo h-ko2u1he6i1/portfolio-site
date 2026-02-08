@@ -50,6 +50,15 @@ export const worksData: Work[] = [
     externalLink: "https://www.furusapon.com/",
   },
   {
+    id: 16,
+    slug: '16',
+    title: "ロート製薬 メラノCC LP",
+    longDescription: "「ロート製薬の人気スキンケアブランド“メラノCC”の進化版『メラノCC＋』シリーズのプロモーションページをフロントエンド実装しました。新規LPでしたがブランドレギュレーションやCMS連携、更新のしやすさを考慮した実装を行いました。",
+    image: "/img/works-img16.png",
+    role: "Coding",
+    externalLink: "https://jp.rohto.com/melanocc/promotion/melanoccplus",
+  },
+  {
     id: 15,
     slug: '15',
     title: "増岡組",
