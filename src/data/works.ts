@@ -38,7 +38,8 @@ export const worksData: Work[] = [
     longDescription: "コーポレートサイトのフロントエンド実装を担当しました。最新情報をスムーズに更新できるよう、ニュースページやイベントページには WordPress を導入し、運用のしやすさを重視しています。さらに、TOP ページにはアニメーションを多用し、訪れたユーザーの目を惹きつけ、企業の魅力が伝わるような表現を意識しました。デザイン性と運用性を両立させたフロントエンド開発を実現しています。",
     image: "/img/works-img03.jpg",
     role: "Coding / WordPress",
-    externalLink: "https://www.marubeni-idigio.com/",
+    movie: "/videos/idigio-pc.mp4",
+    movieSp: "/videos/idigio-sp.mp4",
   },
   {
     id: 4,
