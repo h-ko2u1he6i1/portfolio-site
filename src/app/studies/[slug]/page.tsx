@@ -1,16 +1,16 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import { worksData } from "@/data/works";
+import { studiesData } from "@/data/studies"; // studiesDataをインポート
 import Button from '@/components/common/Button';
 import Footer from '@/components/layout/Footer';
 
-export default async function WorkDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function StudyDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
-  const workDetail = worksData.find(work => work.slug === slug);
+  const studyDetail = studiesData.find(study => study.slug === slug); // studiesDataから検索
 
-  if (!workDetail) {
-    return <div>Work not found</div>;
+  if (!studyDetail) {
+    return <div>Study not found</div>;
   }
 
   return (
@@ -18,11 +18,11 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
       <main className="section">
         <section className="container">
           <div className={styles['work-detail__image-wrapper']}>
-            {workDetail.externalLink ? (
-              <a href={workDetail.externalLink} target="_blank" rel="noopener noreferrer">
+            {studyDetail.externalLink ? (
+              <a href={studyDetail.externalLink} target="_blank" rel="noopener noreferrer">
                 <Image
-                  src={workDetail.image}
-                  alt={workDetail.title}
+                  src={studyDetail.image}
+                  alt={studyDetail.title}
                   width={900}
                   height={600}
                   layout="responsive"
@@ -32,8 +32,8 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
               </a>
             ) : (
               <Image
-                src={workDetail.image}
-                alt={workDetail.title}
+                src={studyDetail.image}
+                alt={studyDetail.title}
                 width={900}
                 height={600}
                 layout="responsive"
@@ -43,28 +43,28 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
             )}
           </div>
 
-          <h1 className={styles['work-detail__title']}>{workDetail.title}</h1>
+          <h1 className={styles['work-detail__title']}>{studyDetail.title}</h1>
 
           <div className={styles['work-detail__info-grid']}>
             <div>
-              <p style={{ fontWeight: 'bold', color: '#00B7CE' }}>{workDetail.role}</p>
+              <p style={{ fontWeight: 'bold', color: '#00B7CE' }}>{studyDetail.role}</p>
             </div>
           </div>
 
           <div className={styles['work-detail__description-section']}>
             <p className={styles['work-detail__description-text']}>
-              {workDetail.longDescription.split('\n').map((line, index) => (
+              {studyDetail.longDescription.split('\n').map((line, index) => (
                 <span key={index}>
                   {line}
-                  {index < workDetail.longDescription.split('\n').length - 1 && <br />}
+                  {index < studyDetail.longDescription.split('\n').length - 1 && <br />}
                 </span>
               ))}
             </p>
-            {workDetail.detailImage && (
+            {studyDetail.detailImage && (
               <div className={styles['work-detail__additional-image']}>
                 <Image
-                  src={workDetail.detailImage}
-                  alt={`${workDetail.title} 詳細画像`}
+                  src={studyDetail.detailImage}
+                  alt={`${studyDetail.title} 詳細画像`}
                   width={900}
                   height={600}
                   layout="responsive"
@@ -72,11 +72,11 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                 />
               </div>
             )}
-            {workDetail.detailImageSp && (
+            {studyDetail.detailImageSp && (
               <div className={styles['work-detail__additional-image-sp']}>
                 <Image
-                  src={workDetail.detailImageSp}
-                  alt={`${workDetail.title} 詳細画像SP`}
+                  src={studyDetail.detailImageSp}
+                  alt={`${studyDetail.title} 詳細画像SP`}
                   width={500}
                   height={300} // 仮の高さ。必要に応じて調整してください
                   layout="responsive"
@@ -84,18 +84,18 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                 />
               </div>
             )}
-            {workDetail.movie && (
+            {studyDetail.movie && (
               <div className={styles['work-detail__movie-wrapper']}>
                 <video controls playsInline muted loop className={styles['work-detail__movie']}>
-                  <source src={workDetail.movie} type="video/mp4" />
+                  <source src={studyDetail.movie} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </div>
             )}
-            {workDetail.movieSp && (
+            {studyDetail.movieSp && (
               <div className={styles['work-detail__movie-sp-wrapper']}>
                 <video controls playsInline muted loop className={styles['work-detail__movie-sp']}>
-                  <source src={workDetail.movieSp} type="video/mp4" />
+                  <source src={studyDetail.movieSp} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </div>
@@ -103,9 +103,9 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
           </div>
 
           <div className="button-wrapper">
-            {workDetail.externalLink && (
+            {studyDetail.externalLink && (
               <Button
-                href={workDetail.externalLink}
+                href={studyDetail.externalLink}
                 variant="primary"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -113,8 +113,8 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                 サイトを見る
               </Button>
             )}
-            <Button href="/works" variant="secondary">
-              Worksページに戻る
+            <Button href="/studies" variant="secondary"> {/* hrefを/studiesに変更 */}
+              Studyページに戻る
             </Button>
           </div>
         </section>

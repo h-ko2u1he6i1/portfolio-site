@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import SectionTitle from '@/components/common/SectionTitle';
 import WorkCardItem from '@/components/works/WorkCardItem';
 import { worksData } from '@/data/works';
+import { studiesData } from '@/data/studies';
 import Button from '@/components/common/Button';
 import GeometricBackground from '@/components/common/GeometricBackground';
 import Footer from '@/components/layout/Footer';
@@ -10,6 +11,7 @@ import Footer from '@/components/layout/Footer';
 export default function Home() {
 
   const featuredWorks = worksData.slice(0, 4);
+  const featuredStudies = studiesData.slice(0, 4);
 
   return (
     <main>
@@ -44,6 +46,30 @@ export default function Home() {
             </div>
             <div className="button-wrapper">
               <Button href="/works" variant="primary">
+                もっと見る
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Studies Section */}
+        <section className="section section--center section--light-gray">
+          <div className="container">
+            <SectionTitle>Study</SectionTitle>
+            <div className={styles['works-grid']}>
+              {featuredStudies.map((study) => (
+                <WorkCardItem
+                  key={study.id}
+                  href={`/studies/${study.slug}`}
+                  image={study.image}
+                  alt={study.title}
+                  title={study.title}
+                  role={study.role}
+                />
+              ))}
+            </div>
+            <div className="button-wrapper">
+              <Button href="/studies" variant="primary">
                 もっと見る
               </Button>
             </div>

@@ -20,6 +20,11 @@ export default function Header() {
               Works
             </Link>
           </li>
+          <li className={styles['header__nav-item']}>
+            <Link href="/studies" className={styles['header__nav-link']}>
+              Study
+            </Link>
+          </li>
         </ul>
       </nav>
       <div className={styles['header__nav--mobile']}>

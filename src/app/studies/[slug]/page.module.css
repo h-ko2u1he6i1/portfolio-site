@@ -1,0 +1,92 @@
+/* Work Detail */
+.work-detail__image-wrapper {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.work-detail__image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.work-detail__info-grid {
+  margin-bottom: 20px;
+}
+
+.work-detail__info-label {
+  font-weight: 700;
+  color: var(--color-gray-800);
+  margin-right: 8px;
+}
+
+.work-detail__description-section {
+  margin-bottom: 40px;
+}
+
+.work-detail__description-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--color-gray-800);
+}
+
+.work-detail__description-text {
+  line-height: 1.8;
+  color: var(--color-gray-700);
+}
+
+.work-detail__external-link-wrapper {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.work-detail__additional-image {
+  margin-top: 80px;
+  text-align: center;
+}
+
+.work-detail__additional-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.work-detail__additional-image-sp {
+  margin-top: 40px; /* 必要に応じて調整 */
+  text-align: center;
+}
+
+.work-detail__additional-image-sp img {
+  max-width: 600px;
+  width: 100%; /* 親要素の幅に合わせて調整 */
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.work-detail__movie-wrapper,
+.work-detail__movie-sp-wrapper {
+  margin-top: 40px; /* 必要に応じて調整 */
+  text-align: center;
+}
+
+.work-detail__movie,
+.work-detail__movie-sp {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.work-detail__movie-sp-wrapper {
+  margin-top: 40px; /* PC用動画との間に余白を追加 */
+}
+
+.work-detail__title {
+  font-size: 1.5rem;
+  text-align: left;
+  margin-bottom: 20px;
+}
