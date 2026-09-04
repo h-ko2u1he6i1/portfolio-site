@@ -1,0 +1,1350 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex">
+<title>ポートフォリオ運用ガイド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    color-scheme: light dark;
+    --paper: #fbfaf7;
+    --surface: #ffffff;
+    --paper-dim: #f1efe8;
+    --ink: #1c1b19;
+    --ink-muted: #6b6863;
+    --ink-faint: #9a978f;
+    --line: #e4e1d8;
+    --line-strong: #cfccc1;
+    --accent: #0098d4;
+    --accent-bar-a: #17b6ea;
+    --accent-bar-b: #ff6bd0;
+    --accent-pink: #d94fae;
+    --warn: #a96a12;
+    --warn-bg: #f8efdd;
+    --code-bg: #f4f2ec;
+    --shadow: 0 1px 2px rgba(28, 27, 25, 0.05), 0 12px 32px -18px rgba(28, 27, 25, 0.22);
+
+    --grad: linear-gradient(90deg, var(--accent-bar-a) 0%, var(--accent-bar-b) 100%);
+
+    --font-display: "Inter", "Helvetica Neue", Arial, sans-serif;
+    --font-body: "Noto Sans JP", "Inter", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --fs-display: clamp(2rem, 1.45rem + 2.4vw, 3rem);
+    --fs-h2: clamp(1.4rem, 1.15rem + 1vw, 1.9rem);
+    --fs-h3: 1.14rem;
+    --fs-small: 0.82rem;
+
+    --measure: 46rem;
+    --radius: 2px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #141519;
+      --surface: #1c1e23;
+      --paper-dim: #212329;
+      --ink: #ece9e2;
+      --ink-muted: #a8a49c;
+      --ink-faint: #726f68;
+      --line: #2c2e35;
+      --line-strong: #3b3e47;
+      --accent: #4ac9f2;
+      --accent-bar-a: #38c6f0;
+      --accent-bar-b: #ff8ad9;
+      --accent-pink: #ff8ad9;
+      --warn: #e0a561;
+      --warn-bg: #2a2415;
+      --code-bg: #1a1c21;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 16px 40px -20px rgba(0, 0, 0, 0.6);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #141519;
+    --surface: #1c1e23;
+    --paper-dim: #212329;
+    --ink: #ece9e2;
+    --ink-muted: #a8a49c;
+    --ink-faint: #726f68;
+    --line: #2c2e35;
+    --line-strong: #3b3e47;
+    --accent: #4ac9f2;
+    --accent-bar-a: #38c6f0;
+    --accent-bar-b: #ff8ad9;
+    --accent-pink: #ff8ad9;
+    --warn: #e0a561;
+    --warn-bg: #2a2415;
+    --code-bg: #1a1c21;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 16px 40px -20px rgba(0, 0, 0, 0.6);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.55;
+    font-feature-settings: "palt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection { background: var(--accent-bar-a); color: #fff; }
+
+  a { color: var(--accent); text-underline-offset: 2px; }
+  a:hover { text-decoration: underline; }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: var(--radius);
+  }
+
+  code, pre, kbd, samp { font-family: var(--font-mono); }
+
+  /* ---------- Shell ---------- */
+  .wrap {
+    max-width: 74rem;
+    margin: 0 auto;
+    padding: clamp(1.5rem, 4vw, 3.5rem) clamp(1.15rem, 5vw, 2.5rem) 6rem;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
+  }
+
+  .brand .mark {
+    display: grid;
+    place-items: center;
+    width: 1.55rem;
+    height: 1.55rem;
+    border-radius: var(--radius);
+    background: var(--grad);
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--ink-muted);
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .theme-toggle:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* ---------- Kicker ---------- */
+  .kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .kicker::before {
+    content: "";
+    width: 2.4rem;
+    height: 2px;
+    background: var(--grad);
+  }
+
+  /* ---------- Masthead ---------- */
+  .masthead { margin-bottom: 2.25rem; }
+  .masthead h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--fs-display);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+    margin: 0.9rem 0 0;
+  }
+  .masthead p {
+    max-width: 40rem;
+    margin: 1rem 0 0;
+    color: var(--ink-muted);
+    font-size: 1.05rem;
+  }
+  .masthead .meta {
+    margin-top: 1.4rem;
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    color: var(--ink-faint);
+  }
+
+  /* ---------- View toggle ---------- */
+  .switch {
+    display: inline-flex;
+    padding: 3px;
+    margin-bottom: 3rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .switch button {
+    appearance: none;
+    border: 0;
+    background: none;
+    padding: 0.5rem 1.1rem;
+    border-radius: 1px;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--ink-muted);
+    cursor: pointer;
+  }
+  .switch button[aria-selected="true"] {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  /* ---------- Layout ---------- */
+  .layout {
+    display: grid;
+    grid-template-columns: 15rem minmax(0, 1fr);
+    gap: clamp(2rem, 6vw, 4.5rem);
+    align-items: start;
+  }
+  @media (max-width: 60rem) {
+    .layout { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  .toc {
+    position: sticky;
+    top: 1.25rem;
+    font-size: 0.85rem;
+  }
+  @media (max-width: 60rem) {
+    .toc { position: static; }
+  }
+  .toc h2 {
+    font-family: var(--font-display);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 0.85rem;
+  }
+  .toc ol { list-style: none; margin: 0; padding: 0; counter-reset: toc; }
+  .toc li { margin: 0; }
+  .toc a {
+    display: block;
+    padding: 0.32rem 0 0.32rem 0.9rem;
+    border-left: 2px solid var(--line);
+    color: var(--ink-muted);
+    text-decoration: none;
+    line-height: 1.4;
+  }
+  .toc a:hover { color: var(--ink); border-color: var(--line-strong); }
+  .toc a.active {
+    color: var(--accent);
+    border-color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* ---------- Prose ---------- */
+  .prose { max-width: var(--measure); }
+  .prose > * { margin: 0; }
+  .prose > * + * { margin-top: 1.15rem; }
+  .prose > section + section { margin-top: 3.25rem; }
+
+  .prose section > * + * { margin-top: 1.15rem; }
+  .prose section > h2 + * { margin-top: 1.25rem; }
+
+  .prose h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--fs-h2);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    text-wrap: balance;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: 1.5rem;
+  }
+  .prose h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--fs-h3);
+    letter-spacing: -0.01em;
+    margin-top: 2rem;
+    scroll-margin-top: 1.5rem;
+  }
+  .prose h3 .idx {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.85em;
+    color: var(--accent);
+    margin-right: 0.5rem;
+  }
+  .prose p { color: var(--ink); }
+  .prose strong { font-weight: 700; }
+  .prose ul, .prose ol { padding-left: 1.3rem; color: var(--ink); }
+  .prose li + li { margin-top: 0.4rem; }
+  .prose li::marker { color: var(--ink-faint); }
+
+  .prose :not(pre) > code {
+    background: var(--code-bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 0.08em 0.38em;
+    font-size: 0.84em;
+    color: var(--accent-pink);
+    word-break: break-word;
+  }
+
+  .lead {
+    font-size: 1.08rem;
+    color: var(--ink-muted);
+    text-wrap: pretty;
+  }
+
+  /* ---------- Code block ---------- */
+  .code {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--code-bg);
+    box-shadow: var(--shadow);
+  }
+  .code__name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 0.9rem;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--ink-muted);
+  }
+  .code__name::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--grad);
+    flex: none;
+  }
+  .code pre {
+    margin: 0;
+    padding: 1rem 1.1rem;
+    overflow-x: auto;
+    font-size: 0.8rem;
+    line-height: 1.65;
+    color: var(--ink);
+    tab-size: 2;
+  }
+  .code pre .c { color: var(--ink-faint); font-style: italic; }
+  .code pre .k { color: var(--accent); }
+  .code pre .s { color: var(--accent-pink); }
+
+  /* ---------- Tables ---------- */
+  .table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    font-variant-numeric: tabular-nums;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.6rem 0.85rem;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  thead th {
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    background: var(--paper-dim);
+    white-space: nowrap;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  td code { white-space: nowrap; }
+  td.center { text-align: center; }
+
+  .req {
+    display: inline-block;
+    padding: 0.05rem 0.4rem;
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: #04222c;
+    font-family: var(--font-display);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  :root[data-theme="dark"] .req,
+  :root:not([data-theme="light"]) .req { color: #04222c; }
+  .opt {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    color: var(--ink-faint);
+  }
+
+  /* ---------- Callouts ---------- */
+  .callout {
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 0.9rem 1.05rem;
+    background: var(--surface);
+    font-size: 0.92rem;
+  }
+  .callout.warn {
+    border-left-color: var(--warn);
+    background: var(--warn-bg);
+  }
+  .callout .tag {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+    color: var(--accent);
+  }
+  .callout.warn .tag { color: var(--warn); }
+
+  /* ---------- Steps ---------- */
+  .step {
+    display: grid;
+    grid-template-columns: 2.6rem minmax(0, 1fr);
+    gap: 0 1.1rem;
+    padding-top: 2.25rem;
+    border-top: 1px solid var(--line);
+  }
+  .step:first-of-type { border-top: 0; padding-top: 0.5rem; }
+  .step__n {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .step__body { min-width: 0; }
+  .step__body > * { margin: 0; }
+  .step__body > * + * { margin-top: 0.9rem; }
+  .step__body h3 {
+    font-family: var(--font-display);
+    font-size: 1.14rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+    scroll-margin-top: 1.5rem;
+  }
+  @media (max-width: 30rem) {
+    .step { grid-template-columns: 1fr; gap: 0.5rem; }
+  }
+
+  .summary-2 {
+    display: grid;
+    gap: 0.75rem;
+    padding: 0;
+    list-style: none;
+    counter-reset: s2;
+  }
+  .summary-2 li {
+    display: grid;
+    grid-template-columns: 1.8rem 1fr;
+    gap: 0.75rem;
+    align-items: baseline;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    margin: 0;
+  }
+  .summary-2 li::before {
+    counter-increment: s2;
+    content: counter(s2);
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  /* ---------- Checklist ---------- */
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+  .checklist li {
+    margin: 0;
+    border-top: 1px solid var(--line);
+  }
+  .checklist li:first-child { border-top: 0; }
+  .checklist label {
+    display: flex;
+    gap: 0.7rem;
+    align-items: flex-start;
+    padding: 0.7rem 0.95rem;
+    cursor: pointer;
+    font-size: 0.92rem;
+  }
+  .checklist input {
+    appearance: none;
+    flex: none;
+    width: 1.05rem;
+    height: 1.05rem;
+    margin-top: 0.12rem;
+    border: 1.5px solid var(--line-strong);
+    border-radius: var(--radius);
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+  }
+  .checklist input::before {
+    content: "";
+    width: 0.6rem;
+    height: 0.6rem;
+    transform: scale(0);
+    background: var(--grad);
+  }
+  .checklist input:checked { border-color: var(--accent); }
+  .checklist input:checked::before { transform: scale(1); }
+  .checklist input:checked + span { color: var(--ink-faint); text-decoration: line-through; }
+
+  .divider-note {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+  }
+
+  [hidden] { display: none !important; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+    .checklist input, .checklist input::before { transition: 0.15s ease; }
+  }
+
+  :root[data-theme="light"] { color-scheme: light; }
+  :root[data-theme="dark"] { color-scheme: dark; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="topbar">
+    <span class="brand"><span class="mark" aria-hidden="true">HK</span> Kohei&rsquo;s Portfolio</span>
+    <button class="theme-toggle" id="themeBtn" type="button" aria-label="配色を切り替え">
+      <span id="themeLabel">Light</span>
+    </button>
+  </div>
+
+  <header class="masthead">
+    <span class="kicker">Operations Guide</span>
+    <h1>ポートフォリオ運用ガイド</h1>
+    <p>このサイトの構造と、作品を追加する手順をまとめたドキュメントです。エンジニアでなくても、手順どおりに進めれば作品を追加できます。</p>
+    <p class="meta">Next.js 16 (App Router) &nbsp;/&nbsp; TypeScript &nbsp;/&nbsp; Vercel &nbsp;&mdash;&nbsp; 最終更新 2026-09-04</p>
+  </header>
+
+  <div class="switch" role="tablist" aria-label="ドキュメントの切り替え">
+    <button role="tab" id="tab-manual" aria-controls="view-manual" aria-selected="true" type="button">作品追加マニュアル</button>
+    <button role="tab" id="tab-spec" aria-controls="view-spec" aria-selected="false" type="button">コード仕様書</button>
+  </div>
+
+  <!-- ============================ MANUAL ============================ -->
+  <section class="view" id="view-manual" role="tabpanel" aria-labelledby="tab-manual">
+    <div class="layout">
+      <aside class="toc" aria-label="マニュアルの目次">
+        <h2>目次</h2>
+        <ol>
+          <li><a href="#m-overview">概要</a></li>
+          <li><a href="#m-prepare">用意するもの</a></li>
+          <li><a href="#m-step1">1. 画像を準備する</a></li>
+          <li><a href="#m-step2">2. フォルダに置く</a></li>
+          <li><a href="#m-step3">3. データに追記する</a></li>
+          <li><a href="#m-step4">4. ローカルで確認</a></li>
+          <li><a href="#m-step5">5. GitHub にアップ</a></li>
+          <li><a href="#m-trouble">困ったとき</a></li>
+          <li><a href="#m-checklist">チェックリスト</a></li>
+        </ol>
+      </aside>
+
+      <article class="prose">
+        <section id="m-overview">
+          <h2>概要</h2>
+          <p class="lead">Works（制作実績）と Study（個人開発）は、同じ手順で追加できます。やることは大きく 2 つだけです。</p>
+          <ol class="summary-2">
+            <li>作品の画像を用意して、決まったフォルダに置く</li>
+            <li>データファイルに 1 ブロック追記する</li>
+          </ol>
+          <p>あとは変更を GitHub の <code>main</code> ブランチに送れば、Vercel が自動でビルドし、数分後に本番サイトへ反映されます。</p>
+        </section>
+
+        <section id="m-prepare">
+          <h2>用意するもの</h2>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>もの</th><th>説明</th></tr></thead>
+              <tbody>
+                <tr><td>プロジェクト一式</td><td><code>portfolio-site</code> フォルダ（GitHub からクローン／ダウンロード済みのもの）</td></tr>
+                <tr><td>テキストエディタ</td><td>VS Code 推奨（無料）。メモ帳でも可</td></tr>
+                <tr><td>作品の画像</td><td>次の手順のサイズで書き出したもの</td></tr>
+                <tr><td>Node.js（任意）</td><td>ローカルで見た目を確認したい場合のみ。無くても追加はできる</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <div class="step" id="m-step1">
+          <div class="step__n">1</div>
+          <div class="step__body">
+            <h3>画像を準備する</h3>
+            <p><strong>必須 — サムネイル画像（<code>image</code>）。</strong>一覧のカードと詳細ページの大きい画像に使われます。</p>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>項目</th><th>推奨</th></tr></thead>
+                <tbody>
+                  <tr><td>縦横比</td><td><strong>3 : 2</strong>（横長）※カードは中央を自動トリミング</td></tr>
+                  <tr><td>サイズ</td><td>横 <strong>1500px</strong> 前後（例 1500 &times; 1000px）</td></tr>
+                  <tr><td>形式</td><td>JPEG（写真系）または PNG</td></tr>
+                  <tr><td>容量</td><td>500KB 以下が目安</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p><strong>任意 — 詳細ページ用のスクリーンショット。</strong>詳細ページ下部に「プレビュー」枠として表示できます。</p>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>種類</th><th>用途</th><th>推奨サイズ</th></tr></thead>
+                <tbody>
+                  <tr><td>PC 版フルスクショ</td><td>ページ全体を上から下まで撮ったもの</td><td>横 1440&ndash;1600px（縦は長くて可）</td></tr>
+                  <tr><td>スマホ版フルスクショ</td><td>スマホ表示のページ全体</td><td>横 600&ndash;750px（縦は長くて可）</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p><strong>任意 — 紹介動画。</strong><code>.mp4</code> 形式。1080p 以下・数 MB に圧縮しておくこと。PC 用・スマホ用を分けられます。</p>
+            <p><strong>ファイル名</strong>は半角英数字とハイフンのみ。既存の命名に合わせると分かりやすいです（番号は「今ある最大番号 + 1」が安全）。</p>
+            <div class="code">
+              <div class="code__name">ファイル名の例</div>
+<pre>サムネイル          … works-img17.jpg
+PC フルスクショ     … worksdetail-img17.jpg
+スマホフルスクショ  … worksdetail-img17.sp.jpg
+動画（PC）          … worksdetail-movie17.mp4
+動画（スマホ）      … worksdetail-movie17.sp.mp4</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="step" id="m-step2">
+          <div class="step__n">2</div>
+          <div class="step__body">
+            <h3>フォルダに置く</h3>
+            <ul>
+              <li>画像 → <code>portfolio-site/public/img/</code> の中</li>
+              <li>動画 → <code>portfolio-site/public/videos/</code> の中</li>
+            </ul>
+            <p>にコピーするだけです。</p>
+            <div class="callout">
+              <span class="tag">パスの書き方</span>
+              データファイルでは先頭に <code>/</code> を付けて書きます。<br>
+              <code>public/img/works-img17.jpg</code> &rarr; データ上は <code>"/img/works-img17.jpg"</code>
+            </div>
+          </div>
+        </div>
+
+        <div class="step" id="m-step3">
+          <div class="step__n">3</div>
+          <div class="step__body">
+            <h3>データファイルに追記する</h3>
+            <p>開くファイルは追加する種類によって異なります。</p>
+            <ul>
+              <li>Works（制作実績）→ <code>portfolio-site/src/data/works.ts</code></li>
+              <li>Study（個人開発）→ <code>portfolio-site/src/data/studies.ts</code></li>
+            </ul>
+            <p>中身は次のような構造です。配列（<code>[ ... ]</code>）の中に、作品ごとの <code>{ ... }</code> ブロックが並んでいます。</p>
+            <div class="code">
+              <div class="code__name">src/data/works.ts（一部）</div>
+<pre><span class="k">export const</span> worksData: Work[] = [
+  {
+    id: <span class="k">1</span>,
+    slug: <span class="s">'1'</span>,
+    title: <span class="s">"一般財団法人 建設業振興基金"</span>,
+    longDescription: <span class="s">"コーポレートサイトの…"</span>,
+    image: <span class="s">"/img/works-img01.jpg"</span>,
+    role: <span class="s">"Coding / WordPress"</span>,
+    externalLink: <span class="s">"https://www.kensetsu-kikin.or.jp/"</span>,
+  },
+  { <span class="c">/* …次の作品… */</span> },
+];   <span class="c">← この ]; の手前に新しいブロックを足す</span></pre>
+            </div>
+            <p><strong>雛形をコピーして貼り付けます。</strong>一覧の先頭に出したいなら <code>[</code> のすぐ下に、末尾に出したいなら最後の <code>},</code> と <code>];</code> の間に貼ります。</p>
+            <div class="code">
+              <div class="code__name">貼り付ける雛形</div>
+<pre>  {
+    id: <span class="k">17</span>,
+    slug: <span class="s">"17"</span>,
+    title: <span class="s">"ここに作品名"</span>,
+    longDescription:
+      <span class="s">"ここに説明文。改行は \n を入れる。\n\n空行も作れます。"</span>,
+    image: <span class="s">"/img/works-img17.jpg"</span>,
+    role: <span class="s">"Coding"</span>,
+    externalLink: <span class="s">"https://example.com/"</span>,
+  },</pre>
+            </div>
+            <div class="callout warn">
+              <span class="tag">よくあるミス</span>
+              貼り付けたら、<strong>前のブロックの末尾に <code>,</code>（カンマ）があるか</strong>必ず確認してください。<code>{ … }</code> と <code>{ … }</code> の間はカンマで区切ります。クォート <code>"</code> の閉じ忘れも要注意です。
+            </div>
+
+            <h3 style="margin-top:1.75rem">各項目の書き方</h3>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>項目</th><th class="center">必須</th><th>書き方・注意</th></tr></thead>
+                <tbody>
+                  <tr><td><code>id</code></td><td class="center"><span class="req">必須</span></td><td><strong>他とかぶらない数字。</strong>普通は「今ある最大 + 1」。画面には出ません。</td></tr>
+                  <tr><td><code>slug</code></td><td class="center"><span class="req">必須</span></td><td>URL の末尾になる文字列。<strong>他とかぶらない。</strong>半角英数字とハイフンのみ（例 <code>"17"</code>、<code>"rohto-lp"</code>）。</td></tr>
+                  <tr><td><code>title</code></td><td class="center"><span class="req">必須</span></td><td>作品名。一覧・詳細・ブラウザのタブに出ます。</td></tr>
+                  <tr><td><code>longDescription</code></td><td class="center"><span class="req">必須</span></td><td>詳細ページの本文。改行は <code>\n</code>（バックスラッシュ + n）。冒頭 120 文字が検索結果の説明文に使われます。</td></tr>
+                  <tr><td><code>image</code></td><td class="center"><span class="req">必須</span></td><td>手順 2 で置いた画像のパス。<code>/img/</code> から始める。</td></tr>
+                  <tr><td><code>role</code></td><td class="center"><span class="req">必須</span></td><td>肩書き。<strong>フィルターに載せるには <code>"Design"</code> か <code>"Coding"</code> を含める。</strong>例 <code>"Coding / WordPress"</code>、<code>"Design"</code>。</td></tr>
+                  <tr><td><code>externalLink</code></td><td class="center"><span class="opt">任意</span></td><td>公開サイトの URL。<strong>必ず <code>https://</code> から。</strong>無いなら<strong>この行ごと削除</strong>する。</td></tr>
+                  <tr><td><code>detailImage</code></td><td class="center"><span class="opt">任意</span></td><td>PC 版フルスクショのパス。例 <code>"/img/worksdetail-img17.jpg"</code></td></tr>
+                  <tr><td><code>detailImageSp</code></td><td class="center"><span class="opt">任意</span></td><td>スマホ版フルスクショのパス。例 <code>"/img/worksdetail-img17.sp.jpg"</code></td></tr>
+                  <tr><td><code>movie</code></td><td class="center"><span class="opt">任意</span></td><td>PC 用動画のパス。例 <code>"/videos/worksdetail-movie17.mp4"</code></td></tr>
+                  <tr><td><code>movieSp</code></td><td class="center"><span class="opt">任意</span></td><td>スマホ用動画のパス。例 <code>"/videos/worksdetail-movie17.sp.mp4"</code></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p><strong>任意の項目は「使うときだけ書く」。</strong>使わない項目は行ごと消してください（空文字 <code>""</code> を残さない）。</p>
+            <div class="callout">
+              <span class="tag">プレビュー枠の条件</span>
+              <code>detailImage</code> / <code>detailImageSp</code> / <code>movie</code> / <code>movieSp</code> の<strong>いずれか 1 つでもある</strong>と、詳細ページに「プレビュー」セクションが表示されます（順に PC 画像 → スマホ画像 → PC 動画 → スマホ動画）。
+            </div>
+
+            <h3 style="margin-top:1.75rem">例 — フルスクショ付きのデザイン案件</h3>
+            <div class="code">
+              <div class="code__name">src/data/works.ts に追記</div>
+<pre>  {
+    id: <span class="k">18</span>,
+    slug: <span class="s">"18"</span>,
+    title: <span class="s">"〇〇株式会社 採用サイト"</span>,
+    longDescription:
+      <span class="s">"採用サイトのデザインを担当しました。信頼感を伝えるため青を基調に…"</span>,
+    image: <span class="s">"/img/works-img18.jpg"</span>,
+    role: <span class="s">"Design"</span>,
+    externalLink: <span class="s">"https://recruit.example.co.jp/"</span>,
+    detailImage: <span class="s">"/img/worksdetail-img18.jpg"</span>,
+    detailImageSp: <span class="s">"/img/worksdetail-img18.sp.jpg"</span>,
+  },</pre>
+            </div>
+
+            <h3 style="margin-top:1.75rem">例 — Study（個人開発）を追加</h3>
+            <p><code>src/data/studies.ts</code> の <code>studiesData</code> に同じ形式で追記します。Study 一覧にはフィルターが無いため <code>role</code> は自由記述で OK です（例 <code>"Next.js / React"</code>）。</p>
+            <div class="code">
+              <div class="code__name">src/data/studies.ts に追記</div>
+<pre>  {
+    id: <span class="k">2</span>,
+    slug: <span class="s">"2"</span>,
+    title: <span class="s">"〇〇管理アプリ"</span>,
+    longDescription:
+      <span class="s">"△△のために作った個人開発アプリです。Next.js / React / TypeScript で…"</span>,
+    image: <span class="s">"/img/study-img02.jpg"</span>,
+    role: <span class="s">"Next.js / React"</span>,
+    externalLink: <span class="s">"https://my-app.vercel.app/"</span>,
+  },</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="step" id="m-step4">
+          <div class="step__n">4</div>
+          <div class="step__body">
+            <h3>ローカルで確認する（任意・推奨）</h3>
+            <p>Node.js が入っていれば、アップ前に手元で見た目を確認できます。</p>
+            <div class="code">
+              <div class="code__name">ターミナル</div>
+<pre>cd portfolio-site
+npm install     <span class="c"># 初回のみ</span>
+npm run dev</pre>
+            </div>
+            <p>ブラウザで <code>http://localhost:3000/works</code> を開いて、次を確認します。</p>
+            <ul>
+              <li>一覧に新しいカードが出ている</li>
+              <li>カードをクリックすると詳細ページが開く</li>
+              <li>画像が表示される（真っ白／グレーなら画像パスかファイル名ミス）</li>
+              <li>説明文の改行が意図どおり</li>
+            </ul>
+            <p>止めるときはターミナルで <kbd>Ctrl</kbd> + <kbd>C</kbd>。</p>
+            <div class="callout warn">
+              <span class="tag">赤いエラー画面が出たら</span>
+              たいていは<strong>カンマの付け忘れ</strong>か<strong>クォート <code>"</code> の閉じ忘れ</strong>です。手順 3 の注意書きを見直してください。
+            </div>
+          </div>
+        </div>
+
+        <div class="step" id="m-step5">
+          <div class="step__n">5</div>
+          <div class="step__body">
+            <h3>GitHub にアップする（本番反映）</h3>
+            <p><code>main</code> ブランチに変更を送ると、Vercel が自動でビルドして数分で本番に反映されます。</p>
+
+            <h3 style="margin-top:1.5rem">方法 A — コマンドで送る</h3>
+            <div class="code">
+              <div class="code__name">ターミナル</div>
+<pre>cd portfolio-site
+git checkout -b add-work-17          <span class="c"># 作業用ブランチ</span>
+git add public/img/works-img17.jpg src/data/works.ts
+git commit -m <span class="s">"作品追加: 〇〇株式会社 採用サイト"</span>
+git push -u origin add-work-17</pre>
+            </div>
+            <p>その後 GitHub 上で Pull Request を作成し「Merge」。<code>main</code> に入った時点で本番反映が始まります。直接 <code>main</code> に push できる運用なら、1 行目の <code>git checkout -b</code> を飛ばして <code>main</code> のまま <code>add → commit → push</code> で OK です。</p>
+
+            <h3 style="margin-top:1.5rem">方法 B — GitHub のサイト上で編集する</h3>
+            <ol>
+              <li>GitHub でリポジトリを開く。</li>
+              <li><code>public/img/</code> に入り「Add file」→「Upload files」で画像をアップ。</li>
+              <li><code>src/data/works.ts</code> を開き、鉛筆アイコン（Edit）で手順 3 の追記をする。</li>
+              <li>ページ下部「Commit changes」で保存（<code>main</code> に直接、またはブランチ + PR）。</li>
+            </ol>
+
+            <h3 style="margin-top:1.5rem">反映の確認</h3>
+            <ul>
+              <li>Vercel のダッシュボードで最新デプロイが <strong>Ready</strong> になったら完了。</li>
+              <li>本番サイトの <code>/works</code>（または <code>/studies</code>）を再読み込みして確認。</li>
+              <li>本番が Basic 認証つきの場合は、設定済みの ID / パスワードが必要です。</li>
+            </ul>
+          </div>
+        </div>
+
+        <section id="m-trouble">
+          <h2>困ったとき</h2>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>症状</th><th>原因と対処</th></tr></thead>
+              <tbody>
+                <tr><td>ビルド／<code>npm run dev</code> が赤いエラー</td><td>カンマ抜け・クォート閉じ忘れ・波カッコ <code>{}</code> の対応ミス。追記部分を見直す。</td></tr>
+                <tr><td>カードは出るが画像がグレー／出ない</td><td><code>image</code> のパス綴り間違い、または画像を <code>public/img/</code> に置き忘れ。大文字小文字も区別される。</td></tr>
+                <tr><td>「サイトを見る」ボタンを出したいのに出ない</td><td><code>externalLink</code> が無い、または <code>https://</code> が抜けている。</td></tr>
+                <tr><td>詳細ページに「プレビュー」枠が出ない</td><td><code>detailImage</code> / <code>detailImageSp</code> / <code>movie</code> / <code>movieSp</code> が 1 つも無いと枠自体が出ない仕様（正常）。</td></tr>
+                <tr><td>新しい作品ページが 404</td><td>本番はビルド時にページを作るため、デプロイ完了前は 404。Vercel が Ready になるまで待つ。<code>slug</code> の重複でも起きる。</td></tr>
+                <tr><td>トップページに出ない</td><td>トップは各カテゴリ<strong>先頭 4 件</strong>のみ表示。5 番目以降は <code>/works</code>・<code>/studies</code> の一覧のみ。</td></tr>
+                <tr><td>並び順を変えたい</td><td><code>works.ts</code> / <code>studies.ts</code> の<strong>配列の並び順</strong>がそのまま表示順。ブロックごと上下に移動する。<code>id</code> の数字は順不同で OK。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="m-checklist">
+          <h2>追加チェックリスト</h2>
+          <p>チェックはこのページ内に保存されます（同じブラウザで開き直すと復元）。</p>
+          <ul class="checklist" id="checklist">
+            <li><label><input type="checkbox"><span>画像を <code>public/img/</code>（動画は <code>public/videos/</code>）に置いた</span></label></li>
+            <li><label><input type="checkbox"><span><code>id</code> は他とかぶっていない数字</span></label></li>
+            <li><label><input type="checkbox"><span><code>slug</code> は他とかぶっていない・半角英数字</span></label></li>
+            <li><label><input type="checkbox"><span><code>image</code> のパスがファイル名と一致（<code>/img/</code> 始まり）</span></label></li>
+            <li><label><input type="checkbox"><span><code>role</code> に <code>Design</code> か <code>Coding</code> を含めた（Works でフィルター表示したいとき）</span></label></li>
+            <li><label><input type="checkbox"><span><code>externalLink</code> は <code>https://</code> 付き、不要なら行ごと削除</span></label></li>
+            <li><label><input type="checkbox"><span>任意項目は使う分だけ記載（空文字を残さない）</span></label></li>
+            <li><label><input type="checkbox"><span>直前のブロックの末尾に <code>,</code> がある</span></label></li>
+            <li><label><input type="checkbox"><span>（できれば）<code>npm run dev</code> で表示確認した</span></label></li>
+            <li><label><input type="checkbox"><span>GitHub の <code>main</code> に反映し、Vercel が Ready になった</span></label></li>
+          </ul>
+        </section>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============================ SPEC ============================ -->
+  <section class="view" id="view-spec" role="tabpanel" aria-labelledby="tab-spec" hidden>
+    <div class="layout">
+      <aside class="toc" aria-label="仕様書の目次">
+        <h2>目次</h2>
+        <ol>
+          <li><a href="#s-overview">1. 全体像</a></li>
+          <li><a href="#s-tree">2. ディレクトリ構成</a></li>
+          <li><a href="#s-routing">3. ルーティング</a></li>
+          <li><a href="#s-model">4. データモデル</a></li>
+          <li><a href="#s-components">5. コンポーネント</a></li>
+          <li><a href="#s-style">6. スタイルシステム</a></li>
+          <li><a href="#s-motion">7. アニメーション</a></li>
+          <li><a href="#s-assets">8. 画像・動画</a></li>
+          <li><a href="#s-auth">9. Basic 認証</a></li>
+          <li><a href="#s-seo">10. SEO / メタデータ</a></li>
+          <li><a href="#s-env">11. 環境変数</a></li>
+          <li><a href="#s-scripts">12. スクリプト</a></li>
+          <li><a href="#s-deploy">13. デプロイ</a></li>
+          <li><a href="#s-gotchas">14. 注意点</a></li>
+        </ol>
+      </aside>
+
+      <article class="prose">
+        <section id="s-overview">
+          <h2><span class="idx">1</span>全体像</h2>
+          <div class="table-scroll">
+            <table>
+              <tbody>
+                <tr><th>フレームワーク</th><td>Next.js 16.1.6（App Router / Turbopack）</td></tr>
+                <tr><th>言語</th><td>TypeScript 5、React 19.1.0</td></tr>
+                <tr><th>スタイル</th><td>グローバル CSS（<code>globals.css</code>）＋ CSS Modules。CSS 変数でトークン管理</td></tr>
+                <tr><th>アニメーション</th><td>CSS 主体のリビール ＋ <code>motion</code>（Framer Motion）＋ WebGL（three.js / R3F）ヒーロー背景</td></tr>
+                <tr><th>データ</th><td>TS ファイルにベタ書き（<code>src/data/*.ts</code>）。CMS・DB なし</td></tr>
+                <tr><th>認証</th><td>Basic 認証（<code>src/proxy.ts</code>、環境変数で ON/OFF）</td></tr>
+                <tr><th>ホスティング</th><td>Vercel。画像は <code>next/image</code> で最適化、動画は <code>public/videos/</code> を直配信</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>設計思想</h3>
+          <ul>
+            <li><strong>コンテンツはコード。</strong>作品追加はデータ配列に 1 要素足すだけで、一覧・詳細・sitemap すべてに反映される。</li>
+            <li><strong>JS が無くても本文は見える。</strong>リビール演出は <code>&lt;html&gt;</code> に <code>.js</code> が付いたときだけ有効化する。</li>
+            <li><strong>1 つのカードコンポーネントを使い回す。</strong>Works と Study は同じ型・同じ UI を共有する。</li>
+          </ul>
+        </section>
+
+        <section id="s-tree">
+          <h2><span class="idx">2</span>ディレクトリ構成</h2>
+          <div class="code">
+            <div class="code__name">portfolio-site/</div>
+<pre>docs/                      <span class="c">… 本ドキュメント群</span>
+public/
+├── img/                   <span class="c">… サムネイル・詳細スクショ・プロフィール写真</span>
+└── videos/                <span class="c">… 作品紹介動画（mp4）</span>
+src/
+├── app/                   <span class="c">… App Router のルート定義</span>
+│   ├── layout.tsx         <span class="c">… 共通 html/body・フォント・メタデータ</span>
+│   ├── globals.css        <span class="c">… トークン＋共通ユーティリティ＋アニメ定義</span>
+│   ├── page.tsx           <span class="c">… トップ（/）</span>
+│   ├── about/page.tsx     <span class="c">… About（/about）</span>
+│   ├── works/
+│   │   ├── page.tsx           <span class="c">… Works 一覧（/works）</span>
+│   │   ├── page.module.css    <span class="c">… Works 一覧だけのレイアウト上書き</span>
+│   │   └── [slug]/page.tsx    <span class="c">… Works 詳細（/works/:slug）</span>
+│   ├── studies/…              <span class="c">… works と同構造</span>
+│   ├── not-found.tsx      <span class="c">… 404</span>
+│   ├── sitemap.ts         <span class="c">… /sitemap.xml を動的生成</span>
+│   └── robots.ts          <span class="c">… /robots.txt を生成</span>
+├── components/
+│   ├── layout/            <span class="c">… Header / Footer / HamburgerMenu / navLinks</span>
+│   ├── common/            <span class="c">… Logo, Kicker, SplitText, SectionTitle,</span>
+│   │                      <span class="c">   PageIntro, Reveal, Button, SkillList</span>
+│   ├── home/              <span class="c">… HeroBackground(+Scene), HeroContent, FeaturedSection</span>
+│   └── works/             <span class="c">… WorkCardGrid, WorkCardItem, WorksBrowser, WorkDetail</span>
+├── data/
+│   ├── works.ts           <span class="c">… 制作実績の配列（worksData）</span>
+│   └── studies.ts         <span class="c">… 個人開発の配列（studiesData）</span>
+├── hooks/                 <span class="c">… useReveal, useHeroTilt, useReducedMotion</span>
+├── types/portfolio.ts     <span class="c">… PortfolioItem 型（Works / Study 共通）</span>
+└── proxy.ts               <span class="c">… Basic 認証ミドルウェア</span></pre>
+          </div>
+          <p>パスエイリアス: <code>@/*</code> → <code>src/*</code>（<code>tsconfig.json</code>）。</p>
+        </section>
+
+        <section id="s-routing">
+          <h2><span class="idx">3</span>ルーティング</h2>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>URL</th><th>ファイル</th><th>生成方式</th><th>内容</th></tr></thead>
+              <tbody>
+                <tr><td><code>/</code></td><td><code>app/page.tsx</code></td><td>静的</td><td>ヒーロー＋ Works 抜粋 4 件＋ Study 抜粋 4 件</td></tr>
+                <tr><td><code>/about</code></td><td><code>app/about/page.tsx</code></td><td>静的</td><td>プロフィール文とスキル一覧</td></tr>
+                <tr><td><code>/works</code></td><td><code>app/works/page.tsx</code></td><td>静的</td><td>全実績＋ Design / Coding フィルター</td></tr>
+                <tr><td><code>/works/[slug]</code></td><td><code>app/works/[slug]/page.tsx</code></td><td>SSG</td><td>実績の詳細</td></tr>
+                <tr><td><code>/studies</code>, <code>/studies/[slug]</code></td><td><code>app/studies/…</code></td><td>静的 / SSG</td><td>個人開発の一覧・詳細</td></tr>
+                <tr><td><code>/sitemap.xml</code></td><td><code>app/sitemap.ts</code></td><td>動的</td><td>静的 4 ページ＋全 works/studies URL</td></tr>
+                <tr><td><code>/robots.txt</code></td><td><code>app/robots.ts</code></td><td>動的</td><td>全許可＋ sitemap 参照</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <ul>
+            <li>詳細ページは <code>generateStaticParams</code> で<strong>ビルド時に全件生成</strong>。データを足したら再ビルド（＝ push して Vercel が再デプロイ）が必要。</li>
+            <li><code>[slug]</code> に一覧へ存在しない値が来たら <code>notFound()</code> で 404。</li>
+          </ul>
+        </section>
+
+        <section id="s-model">
+          <h2><span class="idx">4</span>データモデル</h2>
+          <h3><span class="idx">4.1</span>型定義（<code>src/types/portfolio.ts</code>）</h3>
+          <div class="code">
+            <div class="code__name">src/types/portfolio.ts</div>
+<pre><span class="k">export interface</span> PortfolioItem {
+  id: <span class="k">number</span>;              <span class="c">// 一意の識別子（React key に使用。画面には出ない）</span>
+  slug: <span class="k">string</span>;            <span class="c">// URL の末尾（/works/&lt;slug&gt;）。一意・URL セーフ</span>
+  title: <span class="k">string</span>;           <span class="c">// 作品名</span>
+  longDescription: <span class="k">string</span>; <span class="c">// 詳細本文。"\n" は改行(&lt;br&gt;)になる</span>
+  image: <span class="k">string</span>;           <span class="c">// メイン画像。"/img/xxx.jpg"</span>
+  role: <span class="k">string</span>;            <span class="c">// 肩書き。"Design" / "Coding / WordPress" 等</span>
+  externalLink?: <span class="k">string</span>;   <span class="c">// 公開 URL（https:// 必須）</span>
+  detailImage?: <span class="k">string</span>;    <span class="c">// 詳細ページの縦長フルスクショ（PC）</span>
+  detailImageSp?: <span class="k">string</span>;  <span class="c">// 同（スマホ）</span>
+  movie?: <span class="k">string</span>;          <span class="c">// 紹介動画 mp4（PC）</span>
+  movieSp?: <span class="k">string</span>;        <span class="c">// 同（スマホ）</span>
+}</pre>
+          </div>
+          <p><code>Work</code> と <code>Study</code> はどちらも <code>PortfolioItem</code> の別名。</p>
+
+          <h3><span class="idx">4.2</span>各フィールドの扱い</h3>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>フィールド</th><th class="center">必須</th><th>使われ方 / 注意</th></tr></thead>
+              <tbody>
+                <tr><td><code>id</code></td><td class="center"><span class="req">必須</span></td><td>配列内で重複させない。重複すると React の key 警告＋描画不整合。</td></tr>
+                <tr><td><code>slug</code></td><td class="center"><span class="req">必須</span></td><td><code>/works/&lt;slug&gt;</code> の URL になる。重複禁止。半角英数字とハイフン推奨（現状は連番）。</td></tr>
+                <tr><td><code>title</code></td><td class="center"><span class="req">必須</span></td><td>一覧カード見出し、詳細 <code>&lt;h1&gt;</code>、<code>&lt;title&gt;</code>、OGP。</td></tr>
+                <tr><td><code>longDescription</code></td><td class="center"><span class="req">必須</span></td><td>詳細本文。<code>\n</code> で改行。冒頭 120 文字が meta description / OGP に自動転用。</td></tr>
+                <tr><td><code>image</code></td><td class="center"><span class="req">必須</span></td><td>一覧カード（<strong>3:2 で中央トリミング</strong>）、詳細カバー（原寸・約 12% 拡大）、動画ポスター、OGP 画像。<code>/img/</code> 始まり。ファイルが無いとエラー。</td></tr>
+                <tr><td><code>role</code></td><td class="center"><span class="req">必須</span></td><td>一覧・詳細の Role 行。<strong>Works 一覧のフィルターは <code>role</code> に "design" / "coding" が含まれるかで判定</strong>（大小文字問わず）。</td></tr>
+                <tr><td><code>externalLink</code></td><td class="center"><span class="opt">任意</span></td><td><strong><code>https://</code> から始まる絶対 URL のみ</strong>（<code>new URL()</code> でパースするため不正だとビルド時エラー）。設定すると Link 行と「サイトを見る」ボタンが出る。</td></tr>
+                <tr><td><code>detailImage</code><br><code>detailImageSp</code></td><td class="center"><span class="opt">任意</span></td><td>詳細下部の「プレビュー」枠。縦長スクショ可（枠内が縦スクロール、最大 78vh）。PC 用 横 1440&ndash;1600px、SP 用 横 600&ndash;750px 目安。</td></tr>
+                <tr><td><code>movie</code><br><code>movieSp</code></td><td class="center"><span class="opt">任意</span></td><td><code>public/videos/</code> の mp4。<code>controls / muted / loop / playsInline / preload="none"</code>、ポスターは <code>image</code>。</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout">
+            <span class="tag">プレビュー枠</span>
+            <code>detailImage</code> / <code>detailImageSp</code> / <code>movie</code> / <code>movieSp</code> の<strong>いずれか 1 つでもあると</strong>詳細ページに「プレビュー」セクションが表示される（順に PC 画像 → スマホ画像 → PC 動画 → スマホ動画）。
+          </div>
+
+          <h3><span class="idx">4.3</span>表示順とデータフロー</h3>
+          <div class="code">
+            <div class="code__name">データの流れ</div>
+<pre>src/data/works.ts (worksData 配列)
+        │
+        ├─▶ /            … worksData.slice(0, 4)   配列の先頭 4 件
+        ├─▶ /works       … worksData 全件（配列順）＋ role でフィルター
+        ├─▶ /works/:slug … worksData.find(slug 一致)
+        └─▶ /sitemap.xml … worksData 全件の URL
+
+src/data/studies.ts も同じ構造（フィルター UI は無し）</pre>
+          </div>
+          <ul>
+            <li><strong>配列の並び順 = 画面の表示順。</strong>先頭に置いた作品ほど上（トップは先頭 4 件のみ）。</li>
+            <li><code>id</code> は順不同でよい。表示順は配列位置で決まる。</li>
+          </ul>
+        </section>
+
+        <section id="s-components">
+          <h2><span class="idx">5</span>コンポーネント</h2>
+
+          <h3><span class="idx">5.1</span>レイアウト（<code>components/layout/</code>）</h3>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>名前</th><th>種別</th><th>役割</th></tr></thead>
+              <tbody>
+                <tr><td><code>Header</code></td><td>Server</td><td>ロゴ＋ PC ナビ＋（モバイル時）<code>HamburgerMenu</code>。</td></tr>
+                <tr><td><code>Footer</code></td><td>Server</td><td>ロゴ（<code>size="lg"</code>）＋肩書き＋ナビ＋コピーライト（年は自動）。</td></tr>
+                <tr><td><code>HamburgerMenu</code></td><td>Client</td><td>モバイル用オーバーレイ。<code>createPortal</code> で <code>document.body</code> 直下に描画。Esc・スクロールロック対応。</td></tr>
+                <tr><td><code>navLinks.ts</code></td><td>&mdash;</td><td>ナビの単一ソース（About / Works / Study）。Header・Footer・HamburgerMenu が共有。</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3><span class="idx">5.2</span>共通 UI（<code>components/common/</code>）</h3>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>名前</th><th>役割 / API</th></tr></thead>
+              <tbody>
+                <tr><td><code>Logo</code></td><td>「HK」モノグラム（シアン→ピンクのグラデタイル）＋ワードマーク。<code>size?: "sm" | "lg"</code>、<code>wordmark?: string</code>。</td></tr>
+                <tr><td><code>Kicker</code></td><td>見出し上の英字ラベル。左のグラデ棒と文字が左→右にワイプイン。<code>state</code>（<code>"is-in"</code> で発火）、<code>delay?</code>。</td></tr>
+                <tr><td><code>SplitText</code></td><td>1 文字ずつマスクめくりで出す見出し。表示用は <code>aria-hidden</code>、別に <code>.sr-only</code> のプレーンコピー。</td></tr>
+                <tr><td><code>SectionTitle</code></td><td><code>useReveal</code> ＋ <code>Kicker</code> ＋ <code>SplitText</code> をまとめた <code>&lt;h2&gt;</code>（<code>as</code> で <code>h1</code> 可）。</td></tr>
+                <tr><td><code>PageIntro</code></td><td>ページ冒頭の <code>&lt;h1&gt;</code> ＋ kicker ＋任意の <code>lede</code>。About / Works / Study / 404 で使用。</td></tr>
+                <tr><td><code>Reveal</code></td><td>子要素を「下から出る」リビールでラップ。<code>delay?</code>、<code>y?</code>、<code>className?</code>。</td></tr>
+                <tr><td><code>Button</code></td><td><code>href</code> が <code>/</code> 始まりなら <code>&lt;Link&gt;</code>、外部 URL なら <code>&lt;a&gt;</code>、無ければ <code>&lt;button&gt;</code>。<code>variant</code> あり。</td></tr>
+                <tr><td><code>SkillList</code></td><td>カテゴリ配列 <code>groups: {label, skills[]}[]</code> をアイコングリッド表示。アイコンは <code>skillIcons.ts</code>。ホバー演出なし。</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3><span class="idx">5.3</span>Works / Study（<code>components/works/</code>）</h3>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>名前</th><th>役割</th></tr></thead>
+              <tbody>
+                <tr><td><code>WorkCardGrid</code></td><td><code>PortfolioItem[]</code> をカードとして <code>.card-grid</code> に並べる。<code>hrefBase</code>、<code>half</code>（デスクトップ 2 列固定）、<code>priority</code>、<code>className</code>（gap 上書き）。</td></tr>
+                <tr><td><code>WorkCardItem</code></td><td>1 枚のカード。<code>motion</code> ホバー variants（画像 1.06 倍・タイトル色・矢印）。画像枠 <code>aspect-ratio: 3/2</code>・<code>object-fit: cover</code>。</td></tr>
+                <tr><td><code>WorksBrowser</code></td><td><code>/works</code> 専用。<code>All / Design / Coding</code> フィルター（件数バッジ、<code>aria-pressed</code>、<code>aria-live</code>）＋ <code>WorkCardGrid</code>。</td></tr>
+                <tr><td><code>WorkDetail</code></td><td>Works・Study 共通の詳細ビュー。kicker ＋ タイトル ＋ Role/Link の <code>&lt;dl&gt;</code> ＋ 本文 ＋ カバー画像（スクロール連動パララックス）＋ プレビュー ＋ CTA。</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3><span class="idx">5.4</span>ホーム（<code>components/home/</code>）</h3>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>名前</th><th>役割</th></tr></thead>
+              <tbody>
+                <tr><td><code>HeroContent</code></td><td>ヒーローのテキスト。<code>["Kohei's", "Portfolio"]</code> を 1 文字ずつ出し、<code>useHeroTilt</code> でカーソル追従の微パララックス。</td></tr>
+                <tr><td><code>HeroBackground</code></td><td>WebGL シーンのラッパー。<code>IntersectionObserver</code> で画面外なら描画停止。<code>prefers-reduced-motion</code> 時は非描画。</td></tr>
+                <tr><td><code>HeroBackgroundScene</code></td><td>R3F の <code>&lt;Canvas&gt;</code>。フルスクリーン矩形にフラグメントシェーダ（value-noise fbm ＋ドメインワープ＋周回する色ソース）。低負荷設定。</td></tr>
+                <tr><td><code>FeaturedSection</code></td><td>トップの「Works」「Study」抜粋ブロック（<code>SectionTitle</code> ＋ <code>WorkCardGrid half</code> ＋ 一覧への <code>Button</code>）。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="s-style">
+          <h2><span class="idx">6</span>スタイルシステム</h2>
+          <h3>トークン（<code>globals.css</code> の <code>:root</code>）</h3>
+          <ul>
+            <li><strong>カラー:</strong> <code>--paper</code> <code>--paper-dim</code> <code>--surface</code> / <code>--ink</code> <code>--ink-muted</code> <code>--ink-faint</code> / <code>--line</code> <code>--line-strong</code>。</li>
+            <li><strong>アクセント:</strong> <code>--accent</code>（#17b6ea 水色）、<code>--accent-ink</code>（#0098d4 濃）、<code>--accent-soft</code>、<code>--accent-pink</code>（#ff6bd0）。グラデは水色→ピンク。</li>
+            <li><strong>タイプスケール:</strong> <code>--text-xs</code>〜<code>--text-4xl</code>（大きいものは <code>clamp()</code>）。本文は <code>font-size: 1.0625rem; line-height: 1.75</code>。</li>
+            <li><strong>スペース:</strong> <code>--space-1</code>〜<code>--space-32</code>。</li>
+            <li><strong>その他:</strong> <code>--radius: 2px</code>、<code>--ease: cubic-bezier(0.2,0,0,1)</code>、<code>--container: 1160px</code> / <code>--container-narrow: 760px</code>。</li>
+          </ul>
+          <h3>レイアウトプリミティブ</h3>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>クラス</th><th>用途</th></tr></thead>
+              <tbody>
+                <tr><td><code>.container</code></td><td>中央寄せ・最大幅 <code>--container</code>・左右パディング可変。<code>.container--narrow</code> で 760px。</td></tr>
+                <tr><td><code>.section</code></td><td>上下パディング <code>clamp(4rem, 10vw, 8rem)</code>。<code>.section--center</code> で中央寄せ。</td></tr>
+                <tr><td><code>.card-grid</code></td><td>1 → 2（≥720px）→ 3 列（≥1080px）。<code>.card-grid--half</code> はデスクトップも 2 列維持。</td></tr>
+                <tr><td><code>.kicker</code> ほか</td><td>eyebrow ラベルとグラデ棒、ワイプ演出。</td></tr>
+                <tr><td><code>.reveal</code> / <code>.is-in</code></td><td>汎用リビール（下記）。</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>コンポーネント固有スタイルは同名 <code>.module.css</code>。<code>/works</code> のコンテナ幅 1280px のようなページ単位の上書きは<strong>スコープを絞った Module</strong>で行い、グローバルの <code>--container</code> は変えない。</p>
+        </section>
+
+        <section id="s-motion">
+          <h2><span class="idx">7</span>アニメーション</h2>
+          <h3>リビール（CSS 主体）</h3>
+          <p><strong>キモ: コンテンツはデフォルトで見えている。</strong><code>layout.tsx</code> のインライン <code>&lt;script&gt;</code> が <code>&lt;html&gt;</code> に <code>.js</code> を付けた場合のみ、<code>.js .reveal { opacity:0 }</code> が効いて「隠してから出す」状態になる。</p>
+          <div class="code">
+            <div class="code__name">動作の流れ</div>
+<pre>1. サーバーは reveal 要素を通常表示で返す（JS 無し／失敗でも本文が見える）
+2. クライアントで &lt;script&gt; が &lt;html&gt;.classList.add('js')
+3. useReveal（IntersectionObserver）が可視判定 → is-in を付与 → CSS transition
+4. 保険: 1500ms 経っても未発火なら強制 is-in（バックグラウンドタブ対策）
+5. prefers-reduced-motion 時は transition を無効化し即表示</pre>
+          </div>
+          <ul>
+            <li><code>useReveal&lt;T&gt;()</code> … <code>[ref, inView]</code> を返す。<code>threshold: 0.15</code>、1500ms フォールバック。</li>
+            <li>1 文字めくり（<code>SplitText</code> / <code>HeroContent</code>）… <code>.char</code> を <code>translateY(115%) rotate(7deg)</code> から <code>none</code> へ。<code>--reveal-delay</code> でスタッガー。</li>
+            <li><code>Kicker</code> … グラデ棒 <code>scaleX(0→1)</code>、ラベル <code>clip-path</code> の左→右ワイプ。</li>
+          </ul>
+          <h3>motion（Framer Motion）を使う箇所</h3>
+          <ul>
+            <li><code>WorkCardItem</code> … ホバー variants（画像ズーム／タイトル色／矢印）。</li>
+            <li><code>WorkDetail</code> … <code>useScroll</code> / <code>useTransform</code> でカバー画像の縦パララックス。</li>
+            <li><code>HamburgerMenu</code> … <code>AnimatePresence</code> のオーバーレイ、リンクの段階表示。</li>
+          </ul>
+          <p>いずれも <code>useReducedMotion()</code> を尊重。</p>
+          <h3>ヒーロー背景（WebGL）</h3>
+          <ul>
+            <li>three.js + <code>@react-three/fiber</code>。フルスクリーン矩形＋フラグメントシェーダのみ（3D メッシュなし）。</li>
+            <li>画面外／<code>prefers-reduced-motion</code> で停止。低負荷設定（<code>dpr</code> 上限 1.1、<code>antialias:false</code>、<code>low-power</code>）。</li>
+            <li><code>globals.css</code> の <code>.site-content</code> グラデーションで「紙が上にせり上がる」ように境界を溶かしている。</li>
+          </ul>
+        </section>
+
+        <section id="s-assets">
+          <h2><span class="idx">8</span>画像・動画</h2>
+          <ul>
+            <li>画像は <code>public/img/</code>、動画は <code>public/videos/</code>。データからは <code>/img/...</code> <code>/videos/...</code> で参照。</li>
+            <li>画像は原則 <code>next/image</code> 経由（<code>next.config.ts</code> で AVIF / WebP 生成）。Basic 認証のミドルウェア対象から <code>/img/</code> <code>/videos/</code> は除外済み。</li>
+            <li>目安 — サムネイル <code>image</code>: 横 1500px 前後・<strong>3:2</strong>・JPEG / 詳細 PC スクショ: 横 1440&ndash;1600px / SP スクショ: 横 600&ndash;750px / 動画: 1080p 以下・数 MB。</li>
+            <li>macOS 例: <code>sips --resampleWidth 1500 input.jpg --out public/img/works-imgXX.jpg</code></li>
+          </ul>
+          <div class="callout warn">
+            <span class="tag">既知の挙動</span>
+            ローカルで <code>next start</code> すると <code>next/image</code> の最適化が環境依存で失敗し画像が出ないことがあるが、Vercel 上では問題なし。確認は <code>npm run dev</code> か Vercel Preview で。
+          </div>
+        </section>
+
+        <section id="s-auth">
+          <h2><span class="idx">9</span>Basic 認証（<code>src/proxy.ts</code>）</h2>
+          <ul>
+            <li>Next 16 では middleware が <code>proxy.ts</code> / <code>export function proxy</code> という名前に変わっている。</li>
+            <li><code>BASIC_AUTH_USER</code> と <code>BASIC_AUTH_PASSWORD</code> の<strong>両方が設定されている時だけ</strong> 401 を返す。どちらか空なら素通し（設定漏れで全面ロックしないため）。</li>
+            <li>matcher 除外: <code>api</code> / <code>_next/static</code> / <code>_next/image</code> / <code>favicon.ico</code> / <code>img/</code> / <code>videos/</code> / <code>sitemap.xml</code> / <code>robots.txt</code>。</li>
+          </ul>
+        </section>
+
+        <section id="s-seo">
+          <h2><span class="idx">10</span>SEO / メタデータ</h2>
+          <ul>
+            <li><code>app/layout.tsx</code> … サイト共通の <code>metadata</code>（<code>metadataBase</code> は <code>NEXT_PUBLIC_SITE_URL</code>、<code>title.template = "%s — Kohei's Portfolio"</code>、OGP）。</li>
+            <li>詳細ページ … <code>generateMetadata</code> で <code>title</code> = 作品名、<code>description</code> = <code>longDescription</code> 冒頭 120 文字、OGP 画像 = <code>image</code>。</li>
+            <li><code>app/sitemap.ts</code> / <code>app/robots.ts</code> … データと <code>NEXT_PUBLIC_SITE_URL</code> から動的生成。</li>
+          </ul>
+        </section>
+
+        <section id="s-env">
+          <h2><span class="idx">11</span>環境変数（<code>.env.example</code> 参照）</h2>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>変数</th><th>用途</th><th>例</th></tr></thead>
+              <tbody>
+                <tr><td><code>BASIC_AUTH_USER</code></td><td>Basic 認証ユーザー名（空で認証なし）</td><td><code>kohei</code></td></tr>
+                <tr><td><code>BASIC_AUTH_PASSWORD</code></td><td>Basic 認証パスワード（空で認証なし）</td><td><code>********</code></td></tr>
+                <tr><td><code>NEXT_PUBLIC_SITE_URL</code></td><td>正規 URL。metadata / sitemap / robots に使用</td><td><code>https://example.com</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>ローカルは <code>.env.example</code> を <code>.env.local</code> にコピーして設定。<code>.env*</code> は <code>.env.example</code> を除き Git 管理外。</p>
+        </section>
+
+        <section id="s-scripts">
+          <h2><span class="idx">12</span>スクリプト</h2>
+          <div class="code">
+            <div class="code__name">package.json</div>
+<pre>npm run dev     <span class="c"># 開発サーバー（Turbopack）http://localhost:3000</span>
+npm run build   <span class="c"># 本番ビルド（全詳細ページを静的生成）</span>
+npm run start   <span class="c"># ビルド成果物を配信</span>
+npm run lint    <span class="c"># ESLint（eslint-config-next）</span></pre>
+          </div>
+          <p>型チェック単体は <code>npx tsc --noEmit</code>。</p>
+        </section>
+
+        <section id="s-deploy">
+          <h2><span class="idx">13</span>デプロイ（Vercel）</h2>
+          <ol>
+            <li>Project の <strong>Root Directory</strong> を <code>portfolio-site</code> に設定。</li>
+            <li><strong>Environment Variables</strong> に上記 3 つを Production / Preview 両方へ登録。Basic 認証を使わないなら <code>BASIC_AUTH_*</code> は未設定でよい。</li>
+            <li><code>main</code> へ push → 自動ビルド &amp; デプロイ。プレビューは PR / 他ブランチで自動発行。</li>
+          </ol>
+        </section>
+
+        <section id="s-gotchas">
+          <h2><span class="idx">14</span>注意点・ハマりどころ</h2>
+          <ul>
+            <li><strong>データを足したら再デプロイが必要。</strong>詳細ページはビルド時生成のため、<code>main</code> に反映されるまで新 URL は 404。</li>
+            <li><code>slug</code> / <code>id</code> の重複は不具合のもと。追加時は必ずユニークに。</li>
+            <li><code>externalLink</code> は <code>https://</code> を必ず含める。省略時はキー自体を書かない。</li>
+            <li><code>longDescription</code> の改行は文字列内の <code>\n</code>。通常のダブルクォート文字列なら <code>\n</code>、テンプレートリテラル（バッククォート）なら実改行 OK。</li>
+            <li>画像・動画のパスは<strong>必ず <code>/</code> 始まり</strong>（<code>public/</code> 基準の絶対パス）。<code>./img/...</code> は不可。</li>
+            <li><code>~/.git</code>（ホーム直下に誤って作られた空リポジトリ）には触らない。作業対象は <code>portfolio-site/</code>。</li>
+          </ul>
+        </section>
+
+        <p class="divider-note">このドキュメントの元データはリポジトリの <code>docs/SPEC.md</code> / <code>docs/ADD-WORK.md</code>。編集はそちらで行い、このページはその読みやすい版として配布する想定です。</p>
+      </article>
+    </div>
+  </section>
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+
+    // ---- Theme toggle ----
+    var btn = document.getElementById("themeBtn");
+    var label = document.getElementById("themeLabel");
+    function systemDark() {
+      return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+    function stored() {
+      try { return localStorage.getItem("guide-theme"); } catch (e) { return null; }
+    }
+    function apply(mode) {
+      if (mode === "dark" || mode === "light") root.setAttribute("data-theme", mode);
+      else root.removeAttribute("data-theme");
+      var dark = mode === "dark" || (mode !== "light" && systemDark());
+      label.textContent = dark ? "Dark" : "Light";
+    }
+    apply(stored());
+    btn.addEventListener("click", function () {
+      var cur = root.getAttribute("data-theme") || (systemDark() ? "dark" : "light");
+      var next = cur === "dark" ? "light" : "dark";
+      apply(next);
+      try { localStorage.setItem("guide-theme", next); } catch (e) {}
+    });
+
+    // ---- View switch ----
+    var tabs = document.querySelectorAll('[role="tab"]');
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        tabs.forEach(function (t) {
+          var on = t === tab;
+          t.setAttribute("aria-selected", on ? "true" : "false");
+          document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+        });
+        window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+      });
+    });
+
+    // ---- Checklist persistence ----
+    var list = document.getElementById("checklist");
+    if (list) {
+      var boxes = list.querySelectorAll('input[type="checkbox"]');
+      var KEY = "guide-checklist";
+      var saved = {};
+      try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
+      boxes.forEach(function (b, i) {
+        if (saved[i]) b.checked = true;
+        b.addEventListener("change", function () {
+          var state = {};
+          boxes.forEach(function (x, j) { if (x.checked) state[j] = 1; });
+          try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+        });
+      });
+    }
+
+    // ---- TOC scrollspy ----
+    var links = {};
+    document.querySelectorAll(".toc a").forEach(function (a) {
+      links[a.getAttribute("href").slice(1)] = a;
+    });
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var id = en.target.id;
+        var view = en.target.closest(".view");
+        if (view) view.querySelectorAll(".toc a.active").forEach(function (a) { a.classList.remove("active"); });
+        if (links[id]) links[id].classList.add("active");
+      });
+    }, { rootMargin: "0px 0px -70% 0px", threshold: 0 });
+    document.querySelectorAll(".prose section[id], .step[id]").forEach(function (s) { spy.observe(s); });
+  })();
+</script>
+
+</body>
+</html>

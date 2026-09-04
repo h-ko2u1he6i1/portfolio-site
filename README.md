@@ -2,6 +2,15 @@
 
 Next.js 16 (App Router) 製のポートフォリオサイト。
 
+## ドキュメント
+
+- [docs/SPEC.md](docs/SPEC.md) — コード仕様書（構成・データモデル・アニメーション・デプロイ）
+- [docs/ADD-WORK.md](docs/ADD-WORK.md) — 作品／個人開発の追加マニュアル（非エンジニア向け）
+- [public/guide.html](public/guide.html) — 上記 2 つをまとめた閲覧用の 1 枚 HTML（配布用）。
+  ファイルを直接ブラウザで開くか、デプロイ後は `https://<ドメイン>/guide.html`
+  （Basic 認証がかかっている場合はその ID / パスワードが必要）。
+  内容を変えるときは `docs/*.md` を直し、この HTML にも反映する。
+
 ## 開発
 
 ```bash
