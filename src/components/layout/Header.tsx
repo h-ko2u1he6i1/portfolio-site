@@ -1,33 +1,27 @@
 import Link from "next/link";
 import HamburgerMenu from "./HamburgerMenu";
-import styles from './Header.module.css';
+import { NAV_LINKS } from "./navLinks";
+import Logo from "@/components/common/Logo";
+import styles from "./Header.module.css";
 
 export default function Header() {
   return (
     <header className={styles.header}>
-      <div className={styles.header__logo}>
-        <Link href="/">Kohei&apos;s Portfolio</Link>
-      </div>
-      <nav className={styles['header__nav--desktop']}>
-        <ul className={styles['header__nav-list']}>
-          <li className={styles['header__nav-item']}>
-            <Link href="/about" className={styles['header__nav-link']}>
-              About
-            </Link>
-          </li>
-          <li className={styles['header__nav-item']}>
-            <Link href="/works" className={styles['header__nav-link']}>
-              Works
-            </Link>
-          </li>
-          <li className={styles['header__nav-item']}>
-            <Link href="/studies" className={styles['header__nav-link']}>
-              Study
-            </Link>
-          </li>
+      <Link href="/" className={styles.logo} aria-label="Kohei's Portfolio — トップへ">
+        <Logo />
+      </Link>
+      <nav className={styles.nav} aria-label="メインナビゲーション">
+        <ul className={styles.navList}>
+          {NAV_LINKS.map((link) => (
+            <li key={link.href}>
+              <Link href={link.href} className={styles.navLink}>
+                {link.label}
+              </Link>
+            </li>
+          ))}
         </ul>
       </nav>
-      <div className={styles['header__nav--mobile']}>
+      <div className={styles.mobile}>
         <HamburgerMenu />
       </div>
     </header>

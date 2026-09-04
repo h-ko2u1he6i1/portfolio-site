@@ -1,125 +1,48 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { worksData } from "@/data/works";
-import Button from '@/components/common/Button';
-import Footer from '@/components/layout/Footer';
+import WorkDetail from "@/components/works/WorkDetail";
 
-export default async function WorkDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+export function generateStaticParams() {
+  return worksData.map((work) => ({ slug: work.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const { slug } = await params;
+  const work = worksData.find((w) => w.slug === slug);
+  if (!work) return { title: "Not Found" };
 
-  const workDetail = worksData.find(work => work.slug === slug);
+  return {
+    title: work.title,
+    description: work.longDescription.slice(0, 120),
+    openGraph: {
+      title: work.title,
+      description: work.longDescription.slice(0, 120),
+      images: [{ url: work.image }],
+    },
+  };
+}
 
-  if (!workDetail) {
-    return <div>Work not found</div>;
-  }
+export default async function WorkDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const work = worksData.find((w) => w.slug === slug);
+
+  if (!work) notFound();
 
   return (
-    <>
-      <main className="section">
-        <section className="container">
-          <div className={styles['work-detail__image-wrapper']}>
-            {workDetail.externalLink ? (
-              <a href={workDetail.externalLink} target="_blank" rel="noopener noreferrer">
-                <Image
-                  src={workDetail.image}
-                  alt={workDetail.title}
-                  width={900}
-                  height={600}
-                  layout="responsive"
-                  objectFit="contain"
-                  className={styles['work-detail__image']}
-                />
-              </a>
-            ) : (
-              <Image
-                src={workDetail.image}
-                alt={workDetail.title}
-                width={900}
-                height={600}
-                layout="responsive"
-                objectFit="contain"
-                className={styles['work-detail__image']}
-              />
-            )}
-          </div>
-
-          <h1 className={styles['work-detail__title']}>{workDetail.title}</h1>
-
-          <div className={styles['work-detail__info-grid']}>
-            <div>
-              <p style={{ fontWeight: 'bold', color: '#00B7CE' }}>{workDetail.role}</p>
-            </div>
-          </div>
-
-          <div className={styles['work-detail__description-section']}>
-            <p className={styles['work-detail__description-text']}>
-              {workDetail.longDescription.split('\n').map((line, index) => (
-                <span key={index}>
-                  {line}
-                  {index < workDetail.longDescription.split('\n').length - 1 && <br />}
-                </span>
-              ))}
-            </p>
-            {workDetail.detailImage && (
-              <div className={styles['work-detail__additional-image']}>
-                <Image
-                  src={workDetail.detailImage}
-                  alt={`${workDetail.title} 詳細画像`}
-                  width={900}
-                  height={600}
-                  layout="responsive"
-                  objectFit="contain"
-                />
-              </div>
-            )}
-            {workDetail.detailImageSp && (
-              <div className={styles['work-detail__additional-image-sp']}>
-                <Image
-                  src={workDetail.detailImageSp}
-                  alt={`${workDetail.title} 詳細画像SP`}
-                  width={500}
-                  height={300} // 仮の高さ。必要に応じて調整してください
-                  layout="responsive"
-                  objectFit="contain"
-                />
-              </div>
-            )}
-            {workDetail.movie && (
-              <div className={styles['work-detail__movie-wrapper']}>
-                <video controls playsInline muted loop className={styles['work-detail__movie']}>
-                  <source src={workDetail.movie} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            )}
-            {workDetail.movieSp && (
-              <div className={styles['work-detail__movie-sp-wrapper']}>
-                <video controls playsInline muted loop className={styles['work-detail__movie-sp']}>
-                  <source src={workDetail.movieSp} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            )}
-          </div>
-
-          <div className="button-wrapper">
-            {workDetail.externalLink && (
-              <Button
-                href={workDetail.externalLink}
-                variant="primary"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                サイトを見る
-              </Button>
-            )}
-            <Button href="/works" variant="secondary">
-              Worksページに戻る
-            </Button>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </>
+    <WorkDetail
+      item={work}
+      kicker="Work"
+      backHref="/works"
+      backLabel="Works 一覧へ"
+    />
   );
 }

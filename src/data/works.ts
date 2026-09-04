@@ -1,16 +1,6 @@
-export interface Work {
-  id: number;
-  slug: string;
-  title: string;
-  longDescription: string;
-  image: string;
-  role: string;
-  externalLink?: string;
-  detailImage?: string;
-  detailImageSp?: string;
-  movie?: string;
-  movieSp?: string;
-}
+import type { PortfolioItem } from "@/types/portfolio";
+
+export type Work = PortfolioItem;
 
 export const worksData: Work[] = [
   {
@@ -54,7 +44,7 @@ export const worksData: Work[] = [
     id: 16,
     slug: '16',
     title: "ロート製薬 メラノCC LP",
-    longDescription: "「ロート製薬の人気スキンケアブランド“メラノCC”の進化版『メラノCC＋』シリーズのプロモーションページをフロントエンド実装しました。新規LPでしたがブランドレギュレーションやCMS連携、更新のしやすさを考慮した実装を行いました。",
+    longDescription: "ロート製薬の人気スキンケアブランド“メラノCC”の進化版『メラノCC＋』シリーズのプロモーションページをフロントエンド実装しました。新規LPでしたが、ブランドレギュレーションやCMS連携、更新のしやすさを考慮した実装を行いました。",
     image: "/img/works-img16.png",
     role: "Coding",
     externalLink: "https://jp.rohto.com/melanocc/promotion/melanoccplus",

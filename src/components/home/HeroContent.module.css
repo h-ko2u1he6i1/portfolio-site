@@ -1,0 +1,36 @@
+.inner {
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  margin-top: var(--space-6);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-4xl);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  transform: translate3d(var(--tilt-x, 0), var(--tilt-y, 0), 0)
+    rotate(var(--tilt-r, 0));
+}
+
+.line {
+  display: block;
+}
+
+.role {
+  margin-top: var(--space-6);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.note {
+  margin-top: var(--space-8);
+  max-width: 42ch;
+  color: var(--ink-muted);
+  font-size: var(--text-base);
+}

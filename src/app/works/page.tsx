@@ -1,40 +1,26 @@
-"use client";
-import styles from "./page.module.css";
+import type { Metadata } from "next";
 import { worksData } from "@/data/works";
-import WorkCardItem from "@/components/works/WorkCardItem";
-import Button from '@/components/common/Button';
-import Footer from '@/components/layout/Footer';
+import PageIntro from "@/components/common/PageIntro";
+import WorksBrowser from "@/components/works/WorksBrowser";
+import styles from "./page.module.css";
+
+export const metadata: Metadata = {
+  title: "Works",
+  description: "これまでに手がけた Web サイト・LP の制作実績。",
+};
 
 export default function WorksPage() {
-  const works = worksData;
-
   return (
-    <>
-      <main className="section">
-        <section className="container">
-          <h1 className="page-title">Works</h1>
+    <main className="section">
+      <div className={`container ${styles.container}`}>
+        <PageIntro
+          kicker="Selected work"
+          title="Works"
+          lede={`コーポレートサイト・採用サイト・LP を中心に、デザインまたはフロントエンド実装で携わった ${worksData.length} 件の実績です。`}
+        />
 
-          <div className={styles['works-list']}>
-            {works.map((work) => (
-              <WorkCardItem
-                key={work.id}
-                href={`/works/${work.slug}`}
-                image={work.image}
-                alt={work.title}
-                title={work.title}
-                role={work.role}
-              />
-            ))}
-          </div>
-          <div className="button-wrapper">
-            <Button href="/" variant="secondary">
-              トップに戻る
-            </Button>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </>
+        <WorksBrowser works={worksData} />
+      </div>
+    </main>
   );
 }
-

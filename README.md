@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kohei's Portfolio
 
-## Getting Started
+Next.js 16 (App Router) 製のポートフォリオサイト。
 
-First, run the development server:
+## 開発
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+http://localhost:3000 を開く。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 環境変数
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`.env.example` をコピーして `.env.local` を作成する。
 
-## Learn More
+| 変数 | 用途 |
+| --- | --- |
+| `BASIC_AUTH_USER` / `BASIC_AUTH_PASSWORD` | サイト全体の Basic 認証（`src/proxy.ts`）。両方空にすると認証なしで配信される。 |
+| `NEXT_PUBLIC_SITE_URL` | 正規 URL。metadata / sitemap.xml / robots.txt に使用。 |
 
-To learn more about Next.js, take a look at the following resources:
+## Vercel へのデプロイ
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Root Directory** を `portfolio-site` に設定（このリポジトリのルート）。
+2. Project → Settings → Environment Variables に上記3つを **Production / Preview** 両方へ登録。
+   - Basic 認証を使う場合のみ `BASIC_AUTH_*` を設定。公開後に外すなら削除するだけでよい。
+   - `NEXT_PUBLIC_SITE_URL` は本番ドメイン（例 `https://example.com`）。
+3. `main` ブランチへ push すると自動デプロイ。
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## メモ
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 画像は `public/img/` に配置し `next/image` 経由で最適化。長辺の大きい画像は
+  ビルド前に幅を 1600px 程度へ縮小しておくこと。
+- 動画は `public/videos/`。サイズが大きい場合は Vercel Blob 等の外部配信を検討。
+- `src/data/works.ts` / `src/data/studies.ts` を編集すると一覧・詳細・sitemap に反映される。

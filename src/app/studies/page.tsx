@@ -1,34 +1,25 @@
-import styles from './page.module.css';
-import SectionTitle from '@/components/common/SectionTitle';
-import WorkCardItem from '@/components/works/WorkCardItem'; // WorkCardItemを再利用
-import { studiesData } from '@/data/studies'; // studiesDataをインポート
-import Button from '@/components/common/Button'; // Buttonコンポーネントをインポート
+import type { Metadata } from "next";
+import { studiesData } from "@/data/studies";
+import PageIntro from "@/components/common/PageIntro";
+import WorkCardGrid from "@/components/works/WorkCardGrid";
 
-export default function Studies() {
+export const metadata: Metadata = {
+  title: "Study",
+  description: "学習のために個人開発したアプリケーション。",
+};
+
+export default function StudiesPage() {
   return (
-    <main className={styles.main}>
-      <section className="section section--center">
-        <div className="container">
-          <SectionTitle>Study</SectionTitle> {/* タイトルをStudyに変更 */}
-          <div className={styles['works-grid']}>
-            {studiesData.map((study) => ( // studiesDataをマップ
-              <WorkCardItem
-                key={study.id}
-                href={`/studies/${study.slug}`} // hrefを/studiesに変更
-                image={study.image}
-                alt={study.title}
-                title={study.title}
-                role={study.role}
-              />
-            ))}
-          </div>
-          <div className="button-wrapper">
-            <Button href="/" variant="secondary">
-              TOPへ戻る
-            </Button>
-          </div>
-        </div>
-      </section>
+    <main className="section">
+      <div className="container">
+        <PageIntro
+          kicker="Personal projects"
+          title="Study"
+          lede="モダンな技術スタックの学習を目的に、個人で企画・開発したアプリケーションです。"
+        />
+
+        <WorkCardGrid items={studiesData} hrefBase="/studies" priority />
+      </div>
     </main>
   );
 }

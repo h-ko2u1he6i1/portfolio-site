@@ -1,0 +1,13 @@
+.head {
+  max-width: var(--container-narrow);
+  margin-bottom: var(--space-24);
+}
+
+.title {
+  margin-top: var(--space-4);
+  margin-bottom: 0;
+}
+
+.lede {
+  margin-top: var(--space-6);
+}

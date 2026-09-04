@@ -1,83 +1,37 @@
-"use client";
 import styles from "./page.module.css";
-import SectionTitle from '@/components/common/SectionTitle';
-import WorkCardItem from '@/components/works/WorkCardItem';
-import { worksData } from '@/data/works';
-import { studiesData } from '@/data/studies';
-import Button from '@/components/common/Button';
-import GeometricBackground from '@/components/common/GeometricBackground';
-import Footer from '@/components/layout/Footer';
+import { worksData } from "@/data/works";
+import { studiesData } from "@/data/studies";
+import HeroBackground from "@/components/home/HeroBackground";
+import HeroContent from "@/components/home/HeroContent";
+import FeaturedSection from "@/components/home/FeaturedSection";
 
 export default function Home() {
-
-  const featuredWorks = worksData.slice(0, 4);
-  const featuredStudies = studiesData.slice(0, 4);
-
   return (
     <main>
-      {/* Hero Section */}
       <section className={styles.hero}>
-        <div className={styles.hero__background}>
-          <GeometricBackground />
-        </div>
-        <div className={styles.hero__content}>
-          <h1 className={styles.hero__title}>Kohei&apos;s Portfolio</h1>
-          <p className={styles.hero__subtitle}>Web Designer</p>
-          <p className={styles.hero__description}>このポートフォリオサイトは<br className={styles['br-sp']} />Gemini CLIの使用して作成しました。<br />フレームワークには Next.js を使用し、<br className={styles['br-sp']} />フロントエンドは React をベースに構築しています。</p>
-        </div>
+        <HeroBackground />
+        <HeroContent />
+        <span className={styles.scrollHint} aria-hidden="true">
+          Scroll
+        </span>
       </section>
 
-      <div className={styles.scrollableContent}>
-        {/* Featured Works Section */}
-        <section className="section section--center section--light-gray">
-          <div className="container">
-            <SectionTitle>Works</SectionTitle>
-            <div className={styles['works-grid']}>
-              {featuredWorks.map((work) => (
-                <WorkCardItem
-                  key={work.id}
-                  href={`/works/${work.slug}`}
-                  image={work.image}
-                  alt={work.title}
-                  title={work.title}
-                  role={work.role}
-                />
-              ))}
-            </div>
-            <div className="button-wrapper">
-              <Button href="/works" variant="primary">
-                もっと見る
-              </Button>
-            </div>
-          </div>
-        </section>
+      <FeaturedSection
+        kicker="Selected work"
+        title="Works"
+        items={worksData.slice(0, 4)}
+        hrefBase="/works"
+        ctaLabel="すべての実績"
+        priority
+      />
 
-        {/* Featured Studies Section */}
-        <section className="section section--center section--light-gray">
-          <div className="container">
-            <SectionTitle>Study</SectionTitle>
-            <div className={styles['works-grid']}>
-              {featuredStudies.map((study) => (
-                <WorkCardItem
-                  key={study.id}
-                  href={`/studies/${study.slug}`}
-                  image={study.image}
-                  alt={study.title}
-                  title={study.title}
-                  role={study.role}
-                />
-              ))}
-            </div>
-            <div className="button-wrapper">
-              <Button href="/studies" variant="primary">
-                もっと見る
-              </Button>
-            </div>
-          </div>
-        </section>
-        <Footer />
-      </div>
+      <FeaturedSection
+        kicker="Personal projects"
+        title="Study"
+        items={studiesData.slice(0, 4)}
+        hrefBase="/studies"
+        ctaLabel="Study 一覧"
+      />
     </main>
   );
 }
-

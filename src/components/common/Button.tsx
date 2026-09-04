@@ -1,40 +1,78 @@
-import React from 'react';
-import Link from 'next/link';
-import styles from './Button.module.css';
+import { type ReactNode } from "react";
+import Link from "next/link";
+import styles from "./Button.module.css";
 
 interface ButtonProps {
-  children: React.ReactNode;
+  children: ReactNode;
   href?: string;
-  variant?: 'primary' | 'secondary';
+  variant?: "primary" | "secondary";
   onClick?: () => void;
   target?: string;
   rel?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ children, href, variant = 'primary', onClick, target, rel }) => {
+function Arrow() {
+  return (
+    <svg
+      className={styles.arrow}
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M2 8h11M9 4l4 4-4 4"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export default function Button({
+  children,
+  href,
+  variant = "primary",
+  onClick,
+  target,
+  rel,
+}: ButtonProps) {
   const className = `${styles.button} ${styles[variant]}`;
+  const content = (
+    <>
+      <span>{children}</span>
+      <Arrow />
+    </>
+  );
+
+  if (href && href.startsWith("/")) {
+    return (
+      <Link href={href} className={className} onClick={onClick}>
+        {content}
+      </Link>
+    );
+  }
 
   if (href) {
-    if (href.startsWith('/')) {
-      return (
-        <Link href={href} className={className} onClick={onClick}>
-          {children}
-        </Link>
-      );
-    } else {
-      return (
-        <a href={href} className={className} onClick={onClick} target={target} rel={rel}>
-          {children}
-        </a>
-      );
-    }
+    return (
+      <a
+        href={href}
+        className={className}
+        onClick={onClick}
+        target={target}
+        rel={rel}
+      >
+        {content}
+      </a>
+    );
   }
 
   return (
     <button className={className} onClick={onClick}>
-      {children}
+      {content}
     </button>
   );
-};
-
-export default Button;
+}

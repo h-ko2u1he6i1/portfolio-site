@@ -1,37 +1,72 @@
 .button {
-  display: flex;
-  justify-content: center;
+  --btn-fg: var(--ink);
+  --btn-bg: transparent;
+  --btn-bd: var(--line-strong);
+
+  display: inline-flex;
   align-items: center;
-  width: 250px;
-  padding: 16px 50px;
-  border-radius: 30px;
-  font-weight: bold;
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-  border: 1px solid;
+  gap: 0.6em;
+  padding: 0.9rem 1.6rem;
+  border: 1px solid var(--btn-bd);
+  border-radius: var(--radius);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   cursor: pointer;
-  text-decoration: none; /* Linkの場合に下線を消す */
+  transition:
+    background-color var(--dur) var(--ease),
+    color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
 }
 
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.arrow {
+  transition: transform var(--dur) var(--ease);
+}
+
+.button:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Solid ink */
 .primary {
-  background-color: var(--color-foreground);
-  color: var(--color-background);
-  border-color: var(--color-foreground);
+  --btn-fg: var(--paper);
+  --btn-bg: var(--ink);
+  --btn-bd: var(--ink);
 }
 
 .primary:hover {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
-  border-color: var(--color-foreground);
+  --btn-bg: var(--accent-ink);
+  --btn-bd: var(--accent-ink);
 }
 
+/* Ghost / hairline */
 .secondary {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
-  border-color: var(--color-foreground);
+  --btn-fg: var(--ink);
+  --btn-bg: transparent;
+  --btn-bd: var(--line-strong);
 }
 
 .secondary:hover {
-  background-color: var(--color-foreground);
-  color: var(--color-background);
-  border-color: var(--color-foreground);
+  --btn-fg: var(--paper);
+  --btn-bg: var(--ink);
+  --btn-bd: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .arrow {
+    transition: none;
+  }
+  .button:hover {
+    transform: none;
+  }
 }

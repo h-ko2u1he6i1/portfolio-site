@@ -1,0 +1,59 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  color: var(--ink);
+}
+
+.mark {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-pink) 100%);
+}
+
+.letters {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  color: var(--paper);
+  line-height: 1;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* --- small (header) --- */
+.sm .mark {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+}
+
+.sm .letters {
+  font-size: 11px;
+}
+
+.sm .wordmark {
+  font-size: var(--text-base);
+  letter-spacing: -0.01em;
+}
+
+/* --- large (footer) --- */
+.lg .mark {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+}
+
+.lg .letters {
+  font-size: 18px;
+}
+
+.lg .wordmark {
+  font-size: var(--text-xl);
+  letter-spacing: -0.02em;
+}

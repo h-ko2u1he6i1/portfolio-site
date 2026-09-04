@@ -1,0 +1,28 @@
+/* .wrap is hero-sized and scrolls with the hero (drives the pause observer).
+   .layer is fixed to the viewport so the gradient is one continuous
+   atmosphere behind the page — the content that follows simply rises over
+   it, so there is no hard edge between the hero and the sections below. */
+.wrap {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  /* Fallback / pre-hydration gradient behind the WebGL canvas */
+  background:
+    radial-gradient(50% 45% at 76% 30%, #a6ecfa 0%, transparent 66%),
+    radial-gradient(48% 50% at 84% 74%, #ffc2ec 0%, transparent 62%),
+    radial-gradient(42% 46% at 28% 82%, #bfe9fb 0%, transparent 58%),
+    transparent;
+}
+
+.layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.layer canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
