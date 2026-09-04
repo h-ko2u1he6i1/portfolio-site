@@ -48,11 +48,6 @@
   color: inherit;
 }
 
-/* Tighter gutters than the shared grid so each panel renders larger */
-.grid {
-  gap: var(--space-12) var(--space-6);
-}
-
 .result {
   margin-bottom: var(--space-12);
   font-family: var(--font-sans);

@@ -54,6 +54,7 @@
 
   --container: 1160px;
   --container-narrow: 760px;
+  --container-wide: 1280px;
 }
 
 * {
@@ -125,6 +126,11 @@ img {
 
 .container--narrow {
   max-width: var(--container-narrow);
+}
+
+/* Wider canvas for the index pages (Works / Study) so the panels breathe larger */
+.container--wide {
+  max-width: var(--container-wide);
 }
 
 .section {
@@ -244,6 +250,11 @@ img {
   .card-grid:not(.card-grid--half) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
+
+/* Tighter gutters for the index pages so each panel renders larger */
+.card-grid--tight {
+  gap: var(--space-12) var(--space-6);
 }
 
 /* =========================================================

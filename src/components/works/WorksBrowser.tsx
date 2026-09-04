@@ -66,7 +66,7 @@ export default function WorksBrowser({
         items={visible}
         hrefBase={hrefBase}
         priority
-        className={styles.grid}
+        className="card-grid--tight"
       />
     </>
   );

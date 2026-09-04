@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { worksData } from "@/data/works";
 import PageIntro from "@/components/common/PageIntro";
 import WorksBrowser from "@/components/works/WorksBrowser";
-import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "Works",
@@ -12,7 +11,7 @@ export const metadata: Metadata = {
 export default function WorksPage() {
   return (
     <main className="section">
-      <div className={`container ${styles.container}`}>
+      <div className="container container--wide">
         <PageIntro
           kicker="Selected work"
           title="Works"
